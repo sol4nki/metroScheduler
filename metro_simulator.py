@@ -4,6 +4,8 @@
 
 #     return 1
 
+from banner import no_service
+
 with open('./data/metro_data.csv', 'r') as f:
     metro_data = f.readlines()
     metro_data.pop(0) 
@@ -17,11 +19,34 @@ metro_data.pop(0)
 #     print(colors[dat[3]] + ', '.join(dat) + "\033[0m")
 
 # just trying to imagine what the graph might look like:
-for line in metro_data:
-    dat = line.strip().split(',')
-    if dat[3] == "Blue line" or dat[3] == "Blue line branch":
-        color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
-        print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
-    
+# for line in metro_data:
+#     dat = line.strip().split(',')
+#     if dat[3] == "Blue line" or dat[3] == "Blue line branch":
+#         color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
+#         print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
 
-    
+
+def fare_calc(loc1, loc2, day):
+
+
+    return 1
+
+def metro_timings(loc1, loc2, time):
+    if time <= 6 or time >= 23:
+        no_service()
+        return 0
+    for i in metro_data:
+        if loc1 in i:
+            print(i)
+        if loc2 in i:
+            print(i)
+    return 1
+
+def journey_plan(loc1, loc2, day, time):
+    """
+    loc1 -> loc2 on day (sunday price low) and time peak or offpeak for calc of time and fare
+    """
+
+    return 1
+
+metro_timings("Rajiv Chowk", "Dwarka Sector 14", 5)
