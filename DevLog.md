@@ -80,3 +80,5 @@ More than 32	Rs 64/-	Rs 54/-
 3. changed the data a little added connection1 and connection2
 
 4. added color dictionary which took alot of time to make
+5. trying to figure out the footer now
+6. i used chatgpt to fix the colored menus and other options not visible so now ill use re regular expression matching to edit it with a custom centering function

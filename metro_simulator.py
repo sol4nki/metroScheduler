@@ -22,6 +22,6 @@ for line in metro_data:
     if dat[3] == "Blue line" or dat[3] == "Blue line branch":
         color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
         print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
-    # print(colors[dat[3]] + ', '.join(dat) + "\033[0m")
+    
 
     
