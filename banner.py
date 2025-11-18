@@ -13,7 +13,7 @@ def introduction():
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;8m"
     reset   = "\033[0m"
-    blue = "\033[38;2;0;0;255m"
+    blue = "\033[38;2;50;50;255m"
 
     x = f"""
 {saffron}
@@ -78,6 +78,30 @@ def clear_screen():
     else:  
         os.system('clear')
 
+
+def menu():
+    saffron = "\033[38;2;255;153;51m"
+    white   = "\033[38;2;255;255;255m"
+    green   = "\033[38;2;19;136;8m"
+    reset   = "\033[0m"
+    blue = "\033[38;2;50;50;255m" 
+
+    x = f"""
+\t\t\t{saffron}███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+\t\t\t████╗ ████║██╔════╝████╗  ██║██║   ██║
+\t\t\t{white}██╔████╔██║████{blue}█╗  ██╔{white}██╗ ██║██║   ██║
+\t\t\t{green}██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+\t\t\t██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+\t\t\t╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ {reset}
+    """
+    print("\t\t\t" + "="*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ "))
+    menu_text = [x, "\t\t\t\tI dont recall", "\t\t\t\txyz option 2", "\t\t\t\toption3 idk", "\t\t\t\tmaybe another one"]
+    for i in menu_text:
+        print(i)
+    print("\t\t\t" + "="*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ "))
+    return 1
+    
+
 def time_display():
     """
     i couldnt figure out how to return this and work similarly so i m just printing for now
@@ -90,21 +114,19 @@ def time_display():
         time.sleep(1)
         clear_screen()
 
-
-if __name__ == "__main__":
-    clear_screen() # just using this because i want a clear canvas using python functional notation name_xyz not javascript nameXyz
-    clear_screen() # twice because running only once leads to the dir path still being printed
-    print(introduction())
-    time.sleep(1)
-    clear_screen()
-    for i in range(10):
-        print(loading(i))
-        time.sleep(0.5)
-        clear_screen()
-# while True:
-#     print("="*len("|| "+ time.strftime("%H:%M:%S", time.localtime()) + " ||"))
-#     print("|| "+ time.strftime("%H:%M:%S", time.localtime()), end=" ||\n")
-#     print("="*len("|| "+ time.strftime("%H:%M:%S", time.localtime()) + " ||"))
+def footer_menu():
+    print("[!]* use the arrow keys to move ↑ ↓ and enter to select an option *[!]")
+# if __name__ == "__main__":
+#     clear_screen() # just using this because i want a clear canvas using python functional notation name_xyz not javascript nameXyz
+#     clear_screen() # twice because running only once leads to the dir path still being printed
+#     print(introduction())
 #     time.sleep(1)
 #     clear_screen()
-time_display()
+#     for i in range(5):
+#         print(loading(i))
+#         time.sleep(0.5)
+#         clear_screen()
+
+menu()
+footer_menu()
+# time_display()

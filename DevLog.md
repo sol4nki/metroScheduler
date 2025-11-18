@@ -56,3 +56,4 @@ Plans -> keep ascii look, make graph functional its just an idea rn sketched out
 cant do alot today so ill be working with menus for now, in short, whatll come after the "loading" screen so yeah
 also need to sort the data in magenta and blue line only and remove other lines? or keep the other lines for the graphs cause itll look good
 
+-> -> -> also need to make an option or something to reset colors in case someone's terminal cant render 24bit color escape codes properly, where tho thats the ques
