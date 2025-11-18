@@ -14,7 +14,7 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Connection
 13,Welcome [Conn: Pink],13.7,Red line,Pink,None
 14,Seelampur,14.8,Red line,None,None
 15,Shastri Park,16.4,Red line,None,None
-16,"Kashmere Gate [Conn: Violet,Yellow]",18.5,Red line,Violet,Yellow
+16,"Kashmere Gate [Conn: Violet Yellow]",18.5,Red line,Violet,Yellow
 17,Tis Hazari,19.7,Red line,None,None
 18,Pul Bangash,20.6,Red line,None,None
 19,Pratap Nagar,21.4,Red line,None,None
@@ -157,40 +157,40 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Connection
 9,Cyber City,8.6,Rapid Metro,None,None
 10,Moulsari Avenue,9.2,Rapid Metro,None,None
 11,DLF Phase 3,10,Rapid Metro,None,None
-1,Kashmere Gate [Conn: Yellow],0,Voilet line,Yellow,None
-2,Lal Quila,1.5,Voilet line,None,None
-3,Jama Masjid,2.3,Voilet line,None,None
-4,Delhi Gate,3.7,Voilet line,None,None
-5,ITO,5,Voilet line,None,None
-6,Mandi House [Conn: Blue],5.8,Voilet line,Blue,None
-7,Janpath,7.2,Voilet line,None,None
-8,Central Secretariat [Conn: Yellow],8.5,Voilet line,Yellow,None
-9,Khan Market,10.6,Voilet line,None,None
-10,Jawaharlal Nehru Stadium,12,Voilet line,None,None
-11,Jangpura,12.9,Voilet line,None,None
-12,Lajpat Nagar [Conn: Pink],14.4,Voilet line,Pink,None
-13,Moolchand,15.1,Voilet line,None,None
-14,Kailash Colony,16.4,Voilet line,None,None
-15,Nehru Place,17.4,Voilet line,None,None
-16,Kalkaji Mandir [Conn: Magenta],18.2,Voilet line,Magenta,None
-17,Govind Puri,18.9,Voilet line,None,None
-18,Okhla,20,Voilet line,None,None
-19,Jasola,20.9,Voilet line,None,None
-20,Sarita Vihar,22.1,Voilet line,None,None
-21,Mohan Estate,23.3,Voilet line,None,None
-22,Tughlakabad,25.2,Voilet line,None,None
-23,Badarpur Border,26.3,Voilet line,None,None
-24,Sarai,28.8,Voilet line,None,None
-25,N.H.P.C. Chowk,30.4,Voilet line,None,None
-26,Mewala Maharajpur,31.3,Voilet line,None,None
-27,Sector 28 Faridabad,32.5,Voilet line,None,None
-28,Badkal Mor,34.2,Voilet line,None,None
-29,Old Faridabad,35.4,Voilet line,None,None
-30,Neelam Chowk Ajronda,37,Voilet line,None,None
-31,Bata Chowk,38.3,Voilet line,None,None
-32,Escorts Mujesar,40.1,Voilet line,None,None
-33,Sant Surdas - Sihi,41.8,Voilet line,None,None
-34,Raja Nahar Singh,43.5,Voilet line,None,None
+1,Kashmere Gate [Conn: Yellow],0,Violet line,Yellow,None
+2,Lal Quila,1.5,Violet line,None,None
+3,Jama Masjid,2.3,Violet line,None,None
+4,Delhi Gate,3.7,Violet line,None,None
+5,ITO,5,Violet line,None,None
+6,Mandi House [Conn: Blue],5.8,Violet line,Blue,None
+7,Janpath,7.2,Violet line,None,None
+8,Central Secretariat [Conn: Yellow],8.5,Violet line,Yellow,None
+9,Khan Market,10.6,Violet line,None,None
+10,Jawaharlal Nehru Stadium,12,Violet line,None,None
+11,Jangpura,12.9,Violet line,None,None
+12,Lajpat Nagar [Conn: Pink],14.4,Violet line,Pink,None
+13,Moolchand,15.1,Violet line,None,None
+14,Kailash Colony,16.4,Violet line,None,None
+15,Nehru Place,17.4,Violet line,None,None
+16,Kalkaji Mandir [Conn: Magenta],18.2,Violet line,Magenta,None
+17,Govind Puri,18.9,Violet line,None,None
+18,Okhla,20,Violet line,None,None
+19,Jasola,20.9,Violet line,None,None
+20,Sarita Vihar,22.1,Violet line,None,None
+21,Mohan Estate,23.3,Violet line,None,None
+22,Tughlakabad,25.2,Violet line,None,None
+23,Badarpur Border,26.3,Violet line,None,None
+24,Sarai,28.8,Violet line,None,None
+25,N.H.P.C. Chowk,30.4,Violet line,None,None
+26,Mewala Maharajpur,31.3,Violet line,None,None
+27,Sector 28 Faridabad,32.5,Violet line,None,None
+28,Badkal Mor,34.2,Violet line,None,None
+29,Old Faridabad,35.4,Violet line,None,None
+30,Neelam Chowk Ajronda,37,Violet line,None,None
+31,Bata Chowk,38.3,Violet line,None,None
+32,Escorts Mujesar,40.1,Violet line,None,None
+33,Sant Surdas - Sihi,41.8,Violet line,None,None
+34,Raja Nahar Singh,43.5,Violet line,None,None
 1,Janak Puri West [Conn: Blue],0,Magenta line,Blue,None
 2,Dabri Mor - Janakpuri South,2,Magenta line,None,None
 3,Dashrath Puri,3.1,Magenta line,None,None

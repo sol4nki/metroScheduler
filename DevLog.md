@@ -78,3 +78,5 @@ More than 32	Rs 64/-	Rs 54/-
 ```
 
 3. changed the data a little added connection1 and connection2
+
+4. added color dictionary which took alot of time to make
