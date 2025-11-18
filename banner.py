@@ -80,25 +80,40 @@ def clear_screen():
 
 
 def menu():
+    """
+    this just prints the menu, couldnt figure out shutil center with ascii escape color codes so
+    going with plain stuff and color
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;8m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m" 
+    width = shutil.get_terminal_size().columns
 
     x = f"""
-\t\t\t{saffron}███╗   ███╗███████╗███╗   ██╗██╗   ██╗
-\t\t\t████╗ ████║██╔════╝████╗  ██║██║   ██║
-\t\t\t{white}██╔████╔██║████{blue}█╗  ██╔{white}██╗ ██║██║   ██║
-\t\t\t{green}██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
-\t\t\t██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
-\t\t\t╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ {reset}
+███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+████╗ ████║██╔════╝████╗  ██║██║   ██║
+██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
     """
-    print("\t\t\t" + "="*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ "))
-    menu_text = [x, "\t\t\t\tI dont recall", "\t\t\t\txyz option 2", "\t\t\t\toption3 idk", "\t\t\t\tmaybe another one"]
-    for i in menu_text:
-        print(i)
-    print("\t\t\t" + "="*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ "))
+    print(("═"*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ ")).center(width))
+    for line in x.split("\n"):
+        print(line.center(width))
+
+    
+    active = 0
+    menu_text = ["I dont recall", "xyz option 2", "option3 idk", "maybe another one"]
+    while True:
+        for i in range(len(menu_text)):
+            if i == active:
+                menu_text[i] = f">> {menu_text[i]} <<"
+                # continue
+            print(menu_text[i].center(width))
+        
+        print(("═"*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ ")).center(width))
     return 1
     
 

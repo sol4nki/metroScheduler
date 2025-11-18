@@ -57,3 +57,24 @@ cant do alot today so ill be working with menus for now, in short, whatll come a
 also need to sort the data in magenta and blue line only and remove other lines? or keep the other lines for the graphs cause itll look good
 
 -> -> -> also need to make an option or something to reset colors in case someone's terminal cant render 24bit color escape codes properly, where tho thats the ques
+
+updates -> 
+1. made menu need to animate and add keys working 2. need to google how to make footer work have an basic idea use shutil to get column size and yeah !!!! ALSO USE SHUTIL TO TELL USER TO KEEP TERMINAL SIZE LARGE
+
+2. !!! need to figure out how to take both windows, linux and MacOS inputs 
+
+3. dmrc fare rates found 
+```
+For DMRC
+Distance (in KMs)	FARE	Time Limit (in Mins.)
+Monday to Saturday	Sunday & National Holidays
+0-2	Rs 11/-	Rs 11/-	65
+2-5	Rs 21/-	Rs. 11/-
+5-12	Rs 32/-	Rs 21/-
+12-21	Rs. 43/-	Rs. 32/-	100
+21-32	Rs 54/-	Rs 43/-	180
+More than 32	Rs 64/-	Rs 54/-
+
+```
+
+3. changed the data a little added connection1 and connection2
