@@ -18,7 +18,7 @@ def center_ansi(text, width):
 def introduction():
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
-    green   = "\033[38;2;19;136;8m"
+    green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m"
 
@@ -26,14 +26,14 @@ def introduction():
 {saffron}
         ██████╗ ███████╗██╗     ██╗  ██╗██╗    ███╗   ███╗███████╗████████╗██████╗  ██████╗          
         ██╔══██╗██╔════╝██║     ██║  ██║██║    ████╗ ████║██╔════╝╚══██╔══╝██╔══██╗██╔═══██╗         
-        ██║  ██║█████╗  ██║     ███████║██║    ██╔████╔██║█████╗     ██║   ██████╔╝██║   ██║         
+        ██║  ██║█████╗  ██║     ███████║██║    ██╔████╔██║█████╗     ██║   ██████╔╝██║   ██║  {reset}       
 {white}        ██║  ██║██╔══╝  ██║     ██╔══██║██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██╗██║   ██║         
-        ██████╔╝███████╗███████╗██║  █{blue}█║██║    ██║ ╚═╝ ██{white}║███████╗   ██║   ██║  ██║╚██████╔╝         
-        ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚{blue}═╝╚═╝    ╚═╝     ╚═{white}╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝          
+        ██████╔╝███████╗███████╗██║  █{reset}{blue}█║██║    ██║ ╚═╝ ██{reset}{white}║███████╗   ██║   ██║  ██║╚██████╔╝         
+        ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚{reset}{blue}═╝╚═╝    ╚═╝     ╚═{reset}{white}╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝          
                                                                                                      
 
-██╗    ██╗███████╗██╗      ██████╗ ███{blue}███╗ ███╗   ███╗███{white}████╗███████╗    ██╗   ██╗ ██████╗ ██╗   ██╗
-██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝██╔════╝    ╚██╗ ██╔╝██╔═══██╗██║   ██║
+██╗    ██╗███████╗██╗      ██████╗ ███{reset}{blue}███╗ ███╗   ███╗███{reset}{white}████╗███████╗    ██╗   ██╗ ██████╗ ██╗   ██╗
+██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝██╔════╝    ╚██╗ ██╔╝██╔═══██╗██║   ██║{reset}
 {green}██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  ███████╗     ╚████╔╝ ██║   ██║██║   ██║
 ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  ╚════██║      ╚██╔╝  ██║   ██║██║   ██║
 ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗███████║       ██║   ╚██████╔╝╚██████╔╝
@@ -51,7 +51,7 @@ def loading(i):
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
-    green   = "\033[38;2;19;136;8m"
+    green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;0;0;255m"
     
@@ -59,11 +59,11 @@ def loading(i):
 {saffron}██  {reset}
 """
     dot2 = f"""     
-{saffron}██ {white}██{reset}
+{saffron}██{reset}  {white}██{reset}
  
 """
     dot3 = f"""     
-{saffron}██ {white}██ {green}██{reset}
+{saffron}██{reset}  {white}██{reset}  {green}██{reset}
 """
     width = shutil.get_terminal_size().columns
     match i%3: 
@@ -100,16 +100,16 @@ def menu():
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
-    green   = "\033[38;2;19;136;8m"
+    green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m" 
     width = shutil.get_terminal_size().columns
 
     x = f"""
 {saffron}███╗   ███╗███████╗███╗   ██╗██╗   ██╗
-████╗ ████║██╔════╝████╗  ██║██║   ██║
-{white}██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
-{green}██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+████╗ ████║██╔════╝████╗  ██║██║   ██║{reset}
+{white} ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║{reset}  
+{green} ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║  
 ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
 ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ {reset}
     """
@@ -142,11 +142,20 @@ def menu():
             elif key == "DOWN":
                 active = (active + 1) % len(menu_text)
             elif key == "ENTER":
+                clear_screen()
                 if active == len(menu_text)-1:
                     exit = True
                     return active
+                if active == 3:
+                    more_info()
+                if active == 2:
+                    journey_plan()
+                if active == 1:
+                    metro_timings()
+                if active == 0:
+                    metro_map()
                 
-                return active
+                
             # time.sleep()
             # active = active+1 if active < len(menu_text) else active-1
             # clear_screen()
@@ -155,7 +164,6 @@ def menu():
         return None
         
     return 1
-    
 
 def time_display():
     """
@@ -169,14 +177,13 @@ def time_display():
         time.sleep(1)
         clear_screen()
 
-
 def no_service():
     """
     nothing special only a banner
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
-    green   = "\033[38;2;19;136;8m"
+    green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m"
     red = "\033[38;2;237;28;36m"
@@ -199,7 +206,7 @@ def no_service():
 def more_info():
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
-    green   = "\033[38;2;19;136;8m"
+    green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m"
     red = "\033[38;2;237;28;36m"
@@ -217,6 +224,8 @@ def more_info():
                                               
 """
     x = f"""
+This project supports all the metro lines in Delhi and Delhi NCR region!!!
+You can check metro timings, fare calculations, a metro map displayer and quick metro journey planner :D
 {green}[ Metro Scheduler v1.00 ]{reset}
 {saffron}[ Pranjal Solanki | 2025386 ]{reset}
 [ GitHub: {blue}https://github.com/sol4nki/metroScheduler{reset} ]
@@ -234,22 +243,126 @@ def more_info():
     x = keyinp.input_key()
     print(x)
 
+def journey_plan():
+    saffron = "\033[38;2;255;153;51m"
+    white   = "\033[38;2;255;255;255m"
+    green   = "\033[38;2;19;136;10m"
+    reset   = "\033[0m"
+    blue = "\033[38;2;50;50;255m"
+    red = "\033[38;2;237;28;36m"
 
+    x = f"""
+\t\t\t{saffron}██████╗ ██╗      █████╗ ███╗   ██╗███╗   ██╗███████╗██████╗ 
+\t\t\t██╔══██╗██║     ██╔══██╗████╗  ██║████╗  ██║██╔════╝██╔══██╗{reset}
+\t\t\t{white}██████╔╝██║     ███████║██╔██╗ ██║██╔██╗ ██║█████╗  ██████╔╝{reset}  
+\t\t\t{green}██╔═══╝ ██║     ██╔══██║██║╚██╗██║██║╚██╗██║██╔══╝  ██╔══██╗
+\t\t\t██║     ███████╗██║  ██║██║ ╚████║██║ ╚████║███████╗██║  ██║
+\t\t\t╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝{reset}
+                                                            
+    """
+
+    print(center_ansi(x, shutil.get_terminal_size().columns))
+    x = input(("\t\t\tWhich station are you closest to right now?: "))
+    y = input(("\t\t\tWhat is your final destination?: "))
+    day = ''
+    use_current_time = ''
+    lup = True
+    while lup:
+        day = input(("\t\t\tAre you travelling on a weekday? (y/n): "))
+        if day.lower() == 'y' or day.lower() == 'n':
+            lup = False
+        else:
+            print(f"\t\t\t{red}[!] Please input either y or n [!!]{reset}")
+    lup = True
+    while lup:
+        use_current_time = input(("\t\t\tDo you want to use current time? (y/n): "))
+        if use_current_time.lower() == 'y' or use_current_time.lower() == 'n':
+            lup = False
+        else:
+            print(f"\t\t\t{red}[!] Please input either y or n [!!]{reset}")
+    if use_current_time.lower() == 'y':
+        idk_hrs = (time.strftime("%H", time.localtime()))
+        idk_mins = (time.strftime("%M", time.localtime()))
+        print(f"\t\t\tPlanning journey from {x} to {y} on a {'weekday' if day.lower() == 'y' else 'weekend'} at {idk_hrs}:{idk_mins}...")
+        time.sleep(10)
+    else:
+        idk = (input(("\t\t\tEnter time of travel in 24-hour format [HOUR:MINS] : ")))
+        if ":" not in idk:
+            print(f"\t\t\t{red}[!] Invalid time format! Returning to main menu... [!]{reset}")
+            time.sleep(2)
+            return 1
+        idk_hrs, idk_mins = str(idk).strip().split(":")
+        if len(idk_hrs) == 1:
+            idk_hrs = '0' + idk_hrs
+        if int(idk_hrs) > 23 or int(idk_mins) > 59:
+            print(f"\t\t\t{red}[!] [!] Invalid time format! Returning to main menu... [!]{reset}")
+            time.sleep(2)
+            return 1
+        print(f"\t\t\t:D Planning journey from {x} to {y} on a {'weekday' if day.lower() == 'y' else 'weekend'} at {idk_hrs}:{idk_mins}...")
+        time.sleep(10)
+    return 1
+                
+def metro_timings():
+    saffron = "\033[38;2;255;153;51m"
+    white   = "\033[38;2;255;255;255m"
+    green   = "\033[38;2;19;136;10m"
+    reset   = "\033[0m"
+    blue = "\033[38;2;50;50;255m"
+    x = f"""
+\t\t\t{saffron}████████╗██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ███████╗
+\t\t\t╚══██╔══╝██║████╗ ████║██║████╗  ██║██╔════╝ ██╔════╝{reset}  
+\t\t\t{white}   ██║   ██║██╔████╔██║██║██╔██╗ ██║██║  ███╗███████╗{reset}  
+\t\t\t{green}   ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██║   ██║╚════██║ 
+\t\t\t   ██║   ██║██║ ╚═╝ ██║██║██║ ╚████║╚██████╔╝███████║
+\t\t\t   ╚═╝   ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝{reset}
+                                                     
+    """
+
+    print(center_ansi(x, shutil.get_terminal_size().columns))
+    x = input(("\t\t\tWhich Metro line are you on?: "))
+    y = input(("\t\t\tWhat is the name of your Station? : "))
+    idk_hrs = (time.strftime("%H", time.localtime()))
+    idk_mins = (time.strftime("%M", time.localtime()))
+    print(f"\t\t\tUsing current Time {idk_hrs}:{idk_mins} to find {x} line {y} metro timings...")
+    time.sleep(2)
+    print(center_ansi(x, shutil.get_terminal_size().columns))
+
+    # gotta call that function i forgot its name but yeah wtv calculates timing and stuff also i need to generate qr code
+    return 1
+               
+def metro_map():
+    saffron = "\033[38;2;255;153;51m"
+    white   = "\033[38;2;255;255;255m"
+    green   = "\033[38;2;19;136;10m"
+    reset   = "\033[0m"
+    blue = "\033[38;2;50;50;255m"
+    x = f"""
+{saffron}███╗   ███╗ █████╗ ██████╗ 
+████╗ ████║██╔══██╗██╔══██╗{reset}  
+{white}██╔████╔██║███████║██████╔╝{reset}  
+{green}██║╚██╔╝██║██╔══██║██╔═══╝  
+██║ ╚═╝ ██║██║  ██║██║     
+╚═╝     ╚═╝╚═╝  ╚═╝╚═╝ {reset}    
+                           
+    """
+
+    print(center_ansi(x, shutil.get_terminal_size().columns))
+    return 1
 
 if __name__ == "__main__":
-#     clear_screen() # just using this because i want a clear canvas using python functional notation name_xyz not javascript nameXyz
-#     clear_screen() # twice because running only once leads to the dir path still being printed
-#     (introduction())
-#     time.sleep(1)
-#     clear_screen()
-#     for i in range(3):
-#         print(loading(i))
-#         time.sleep(0.5)
-#         clear_screen()
+    clear_screen() # just using this because i want a clear canvas using python functional notation name_xyz not javascript nameXyz
+    clear_screen() # twice because running only once leads to the dir path still being printed
+    (introduction())
+    time.sleep(1)
+    clear_screen()
+    for i in range(3):
+        print(loading(i))
+        time.sleep(0.5)
+        clear_screen()
 
-    # x = menu()
+    x = menu()
     # print(x)
-    (more_info())
+    # (more_info())
     # time_display()
 
-    # no_service()
+    no_service()

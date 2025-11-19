@@ -84,3 +84,16 @@ More than 32	Rs 64/-	Rs 54/-
 6. i used chatgpt to fix the colored menus and other options not visible so now ill use re regular expression matching to edit it with a custom centering function
 7. write a small algorithm to calc shortest route?? 
 8. start taking inputs [done]
+
+
+# day 3 (wed nov 19)
+
+ill be working on "qr code" because maps are almost impossible to make man FF too hard
+
+-> !!! map idea -> do one thing map will basically contain xyz line and uska poora map and current metro (from current time)
+-> try to add metro animation somehow, wont be hard just use time(1) refresh every sec and yeah update it 
+
+-> figured out the biggest headache. "green   = "\033[38;2;19;136;10m" yes literally the issue was "saturation in b/w the contrast basically same as terminal bg hence not visible on b/w terminals lol
+
+-> also graph idea -> USE LAT LONG TO MAP THEM?? LIKE BEST RIGHT? but need to figure out how but yeah might just work
+~~~~^^^^ took inspiration from mapscii braille maps in terminal so yeah gotta figure it out now 
