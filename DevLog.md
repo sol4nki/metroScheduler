@@ -98,7 +98,7 @@ ill be working on "qr code" because maps are almost impossible to make man FF to
 -> also graph idea -> USE LAT LONG TO MAP THEM?? LIKE BEST RIGHT? but need to figure out how but yeah might just work
 ^^^^ took inspiration from mapscii braille maps in terminal so yeah gotta figure it out now 
 
-# day 4 (wed nov 19)
+# day 4 (thu nov 20)
 
 need to do:
 -> braille maps 
@@ -279,4 +279,6 @@ while True:
 just gotta work w/ the joining of these chars now somehow hmm using \\ - | or sum better chars "mapscii braille if it works"
 
 
+# day 5 (fri nov 21)
 
+todos -> graph finish, logic setup for main loop i.e. fare and time calc (will be easy because of dict) (maybe(maybe))
