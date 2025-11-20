@@ -96,4 +96,13 @@ ill be working on "qr code" because maps are almost impossible to make man FF to
 -> figured out the biggest headache. "green   = "\033[38;2;19;136;10m" yes literally the issue was "saturation in b/w the contrast basically same as terminal bg hence not visible on b/w terminals lol
 
 -> also graph idea -> USE LAT LONG TO MAP THEM?? LIKE BEST RIGHT? but need to figure out how but yeah might just work
-~~~~^^^^ took inspiration from mapscii braille maps in terminal so yeah gotta figure it out now 
+^^^^ took inspiration from mapscii braille maps in terminal so yeah gotta figure it out now 
+
+# day 4 (wed nov 19)
+
+need to do:
+-> braille maps 
+-> first actually map the coordinates on some graph or something or write py script to visualize and create bounding boxes
+-> [!!!!] just figured out that many of the coordinate pairs are wrong in this dataset even tho its a nice dataset i have to fix it myself F
+
+-> almsot entire day spend fixing the map bruh

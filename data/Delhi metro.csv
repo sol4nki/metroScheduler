@@ -1,12 +1,12 @@
 ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Year),Layout,Latitude,Longitude
 1,Shaheed Sthal(First Station),0,Red line,08-03-2019,Elevated,28.6706109,77.4155822
-2,Hindon River,1,Red line,08-03-2019,Elevated,28.878965,77.4154832
+2,Hindon River,1,Red line,08-03-2019,Elevated,28.6734147,77.4035924
 3,Arthala,2.5,Red line,08-03-2019,Elevated,28.676999,77.3918919
-4,Mohan Nagar,3.2,Red line,08-03-2019,Elevated,28.60631905,77.10608185
-5,Shyam park,4.5,Red line,08-03-2019,Elevated,28.6988072,28.6988072
+4,Mohan Nagar,3.2,Red line,08-03-2019,Elevated,28.6785,77.3839
+5,Shyam park,4.5,Red line,08-03-2019,Elevated,28.678232,77.370902
 6,Major Mohit Sharma,5.7,Red line,08-03-2019,Elevated,28.6776112,77.3581426
-7,Raj Bagh,6.9,Red line,08-03-2019,Elevated,28.6408602,77.2094999
-8,Shaheed Nagar,8.2,Red line,08-03-2019,Elevated,28.5307795,77.2120573
+7,Raj Bagh,6.9,Red line,08-03-2019,Elevated,28.677031,77.346578
+8,Shaheed Nagar,8.2,Red line,08-03-2019,Elevated,28.676632,77.333759
 9,Dilshad Garden,9.4,Red line,04-06-2008,Elevated,28.67592,77.32142
 10,Jhil Mil,10.3,Red line,04-06-2008,Elevated,28.67579,77.31239
 11,Mansarovar Park,11.4,Red line,04-06-2008,Elevated,28.67544,77.30095
@@ -109,11 +109,11 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 42,Botanical Garden [Conn: Magenta],44.7,Blue line,12-11-2009,Elevated,28.56409,77.3342
 43,Golf Course,45.9,Blue line,12-11-2009,Elevated,28.56714,77.34598
 44,Noida City Center,47.2,Blue line,12-11-2009,Elevated,28.57466,77.35608
-45,Noida Sector 34,48.1,Blue line,09-03-2019,Elevated,28.4808629,77.0848883
-46,Noida Sector 52 [Conn: Aqua],49.3,Blue line,09-03-2019,Elevated,28.4808629,77.0848883
-47,Noida Sector 61,50.5,Blue line,09-03-2019,Elevated,28.4808629,77.0848883
-48,Noida Sector 59,51.5,Blue line,09-03-2019,Elevated,28.4808629,77.0848883
-49,Noida Sector 62,52.7,Blue line,09-03-2019,Elevated,28.4808629,77.0848883
+45,Noida Sector 34,48.1,Blue line,09-03-2019,Elevated,28.58372415,77.3604674878534
+46,Noida Sector 52 [Conn: Aqua],49.3,Blue line,09-03-2019,Elevated,28.5867,77.3728
+47,Noida Sector 61,50.5,Blue line,09-03-2019,Elevated,28.5976,77.3723
+48,Noida Sector 59,51.5,Blue line,09-03-2019,Elevated,28.6065,77.3727
+49,Noida Sector 62,52.7,Blue line,09-03-2019,Elevated,28.617049,77.373619
 1,Yamuna Bank,0,Blue line branch,10-05-2009,At-Grade,28.62331,77.26792
 2,Laxmi Nagar,1.3,Blue line branch,06-01-2010,Elevated,28.63064,77.27749
 3,Nirman Vihar,2.4,Blue line branch,06-01-2010,Elevated,28.63663,77.28683
@@ -146,19 +146,19 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 19,Pandit Shree Ram Sharma,21.5,Green line,24-06-2018,Elevated,28.689281,76.9511988
 20,Bahdurgarh City,23,Green line,24-06-2018,Elevated,28.6907847,76.9354851
 21,Brigadier Hoshiar Singh,24.8,Green line,24-06-2018,Elevated,28.6974603,76.9192027
-1,Sector 55-66 ,0,Rapid Metro,31-03-2017,Elevated,28.4936,77.0935
-2,Sector 54 Chowk ,1.1,Rapid Metro,31-03-2017,Elevated,28.4936,77.0935
-3,Sector 53-54,2.6,Rapid Metro,25-04-2017,Elevated,28.4936,77.0935
-4,Sector 42-43,3.9,Rapid Metro,25-04-2017,Elevated,28.4936,77.0935
-5,DLF Phase 1 ,5.5,Rapid Metro,31-03-2017,Elevated,28.4936,77.0935
-6,Sikandarpur [Conn: Yellow],6.6,Rapid Metro,14-11-2013,Elevated,28.4936,77.0935
-7,DLF Phase 2 ,7.3,Rapid Metro,14-11-2013,Elevated,28.4936,77.0935
-8,Belvedere Towers ,8,Rapid Metro,14-11-2013,Elevated,28.4936,77.0935
-9,Cyber City ,8.6,Rapid Metro,07-05-2014,Elevated,28.4936,77.0935
-10,Moulsari Avenue,9.2,Rapid Metro,14-11-2013,Elevated,28.4936,77.0935
-11,DLF Phase 3 ,10,Rapid Metro,14-11-2013,Elevated,28.4936,77.0935
+1,Sector 55-66 ,0,Rapid Metro,31-03-2017,Elevated,28.42336,77.10513
+2,Sector 54 Chowk ,1.1,Rapid Metro,31-03-2017,Elevated,28.42600,77.10170
+3,Sector 53-54,2.6,Rapid Metro,25-04-2017,Elevated,28.42690,77.09920
+4,Sector 42-43,3.9,Rapid Metro,25-04-2017,Elevated,28.42360,77.09530
+5,DLF Phase 1 ,5.5,Rapid Metro,31-03-2017,Elevated,28.47076,77.09423
+6,Sikandarpur [Conn: Yellow],6.6,Rapid Metro,14-11-2013,Elevated,28.48610,77.08090
+7,DLF Phase 2 ,7.3,Rapid Metro,14-11-2013,Elevated,28.48753,77.09295
+8,Belvedere Towers ,8,Rapid Metro,14-11-2013,Elevated,28.49207,77.08953
+9,Cyber City ,8.6,Rapid Metro,07-05-2014,Elevated,28.49806,77.08916
+10,Moulsari Avenue,9.2,Rapid Metro,14-11-2013,Elevated,28.50070,77.09460
+11,DLF Phase 3 ,10,Rapid Metro,14-11-2013,Elevated,28.49357,77.09366
 1,Kashmere Gate [Conn: Yellow],0,Voilet line,28-05-2017,Underground,28.6675,77.22817
-2,Lal Quila,1.5,Voilet line,28-05-2017,Underground,27.92086195,77.52850191
+2,Lal Quila,1.5,Voilet line,28-05-2017,Underground,28.656657,77.236693
 3,Jama Masjid,2.3,Voilet line,28-05-2017,Underground,28.65001015,77.23767617
 4,Delhi Gate,3.7,Voilet line,28-05-2017,Underground,28.6392036,77.2407823
 5,ITO,5,Voilet line,08-06-2015,Underground,28.6305091,77.2414363
@@ -174,18 +174,18 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 15,Nehru Place,17.4,Voilet line,03-10-2010,Elevated,28.55148,77.25154
 16,Kalkaji Mandir [Conn: Magenta],18.2,Voilet line,03-10-2010,Elevated,28.55007,77.25835
 17,Govind Puri,18.9,Voilet line,03-10-2010,Elevated,28.54451,77.26401
-18,Okhla,20,Voilet line,03-10-2010,Elevated,28.54292,77.27504
+18,Harkesh Nagar Okhla,20,Voilet line,03-10-2010,Elevated,28.54292,77.27504
 19,Jasola,20.9,Voilet line,03-10-2010,Elevated,28.53824,77.28319
 20,Sarita Vihar,22.1,Voilet line,03-10-2010,Elevated,28.52878,77.28826
 21,Mohan Estate,23.3,Voilet line,14-01-2011,Elevated,28.51938,77.29388
 22,Tughlakabad,25.2,Voilet line,14-01-2011,Elevated,28.50254,77.2993
 23,Badarpur Border,26.3,Voilet line,14-01-2011,Elevated,28.49334,77.30307
-24,Sarai,28.8,Voilet line,06-09-2015,Elevated,28.6517178,77.2219388
-25,N.H.P.C. Chowk,30.4,Voilet line,06-09-2015,Elevated,28.45769,77.2219388
+24,Sarai,28.8,Voilet line,06-09-2015,Elevated,28.4781,77.3049
+25,N.H.P.C. Chowk,30.4,Voilet line,06-09-2015,Elevated,28.45766,77.307422
 26,Mewala Maharajpur,31.3,Voilet line,06-09-2015,Elevated,28.4418747,77.3023001
-27,Sector 28 Faridabad,32.5,Voilet line,06-09-2015,Elevated,28.54525655,77.03257609
+27,Sector 28 Faridabad,32.5,Voilet line,06-09-2015,Elevated,28.4334,77.3142
 28,Badkal Mor,34.2,Voilet line,06-09-2015,Elevated,28.422814,77.310278
-29,Old Faridabad,35.4,Voilet line,06-09-2015,Elevated,28.4808629,77.0848883
+29,Old Faridabad,35.4,Voilet line,06-09-2015,Elevated,28.4108,77.3115
 30,Neelam Chowk Ajronda,37,Voilet line,06-09-2015,Elevated,28.3974824,77.3123599
 31,Bata Chowk,38.3,Voilet line,06-09-2015,Elevated,28.3858361,77.313462
 32,Escorts Mujesar,40.1,Voilet line,06-09-2015,Elevated,28.3702344,77.3149203
@@ -223,16 +223,16 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 5,Shakurpur,6.3,Pink line,14-03-2018,Elevated,28.6857668,77.1496094
 6,Punjabi Bagh West,7.7,Pink line,14-03-2018,Elevated,28.6703201,77.1420875
 7,ESI BASAI DARAPUR,10.2,Pink line,14-03-2018,Elevated,28.6580737,77.1272678
-8,Rajouri Garden [Conn: Blue],11.3,Pink line,14-03-2018,Elevated,28.6421518,77.11606038
+8,Rajouri Garden [Conn: Blue],11.3,Pink line,14-03-2018,Elevated,28.64902,77.1227
 9,Maya Puri,12.8,Pink line,14-03-2018,Elevated,28.6371795,77.1297333
 10,Naraina Vihar,14.3,Pink line,14-03-2018,Underground,28.6273375,77.1403175
-11,Delhi Cantt,16.1,Pink line,14-03-2018,Elevated,28.5938331,77.13497891
+11,Delhi Cantt,16.1,Pink line,14-03-2018,Elevated,28.6087,77.1404
 12,Durgabai Deshmukh South Campus [Conn: Orange],19.7,Pink line,14-03-2018,Elevated,28.5894384,77.1690817
 13,Sir Vishweshwaraiah Moti Bagh,21,Pink line,06-08-2018,Elevated,28.5785326,77.175741
 14,Bhikaji Cama Place,22.6,Pink line,06-08-2018,Underground,28.56790025,77.18701648
 15,Sarojini Nagar,23.8,Pink line,06-08-2018,Underground,28.5741575,77.1953703
 16,Dilli Haat INA [Conn: Yellow],24.9,Pink line,06-08-2018,Underground,28.57440755,77.21024148
-17,South Extension,26.1,Pink line,06-08-2018,Underground,28.6517178,77.2219388
+17,South Extension,26.1,Pink line,06-08-2018,Underground,28.5686,77.2203
 18,Lajpat Nagar [Conn: Violet],27.7,Pink line,06-08-2018,Underground,28.57079,77.23653
 19,Vinobapuri,29.1,Pink line,31-12-2018,Underground,28.5669763,77.2491906
 20,Ashram,30.3,Pink line,31-12-2018,Underground,28.5724231,77.2585979
@@ -253,29 +253,27 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 35,Maujpur,49.1,Pink line,31-10-2018,Elevated,28.69197845,77.27962397
 36,Gokulpuri,50.4,Pink line,31-10-2018,Elevated,28.7024752,77.2861253
 37,Johri Enclave,51.7,Pink line,31-10-2018,Elevated,28.71288,77.2861253
-38,Shiv Vihar,52.6,Pink line,31-10-2018,Elevated,28.61753755,77.03543017
-1,Noida Sector 51 [Conn: Blue],0,Aqua line,25-01-2019,Elevated,28.5857,77.3753
-2,Noida Sector 50,1.3,Aqua line,25-01-2019,Elevated,28.535517,77.391029
-3,Noida Sector 76,2.3,Aqua line,25-01-2019,Elevated,28.568746,77.382685
-4,Noida Sector 101,3.4,Aqua line,25-01-2019,Elevated,28.556402,77.384798
-5,Noida Sector 81,4.3,Aqua line,25-01-2019,Elevated,28.6225753,77.3743146
-6,NSEZ Noida,6.3,Aqua line,25-01-2019,Elevated,28.535517,77.391029
-7,Noida Sector 83,7.4,Aqua line,25-01-2019,Elevated,28.524115,77.397244
-8,Noida Sector 137,8.9,Aqua line,25-01-2019,Elevated,28.5090789,77.409015
-9,Noida Sector 142,10.5,Aqua line,25-01-2019,Elevated,28.4758348,77.55447875
-10,Noida Sector 143,11.5,Aqua line,25-01-2019,Elevated,28.50266325,77.42625566
-11,Noida Sector 144,12.9,Aqua line,25-01-2019,Elevated,28.4089049,76.9155232
-12,Noida Sector 145,14.1,Aqua line,25-01-2019,Elevated,28.4089049,76.9155232
-13,Noida Sector 146,15.8,Aqua line,25-01-2019,Elevated,28.4082289,76.963024
-14,Noida Sector 147,17.3,Aqua line,25-01-2019,Elevated,28.4089049,76.9155232
-15,Noida Sector 148,18.9,Aqua line,25-01-2019,Elevated,28.4758348,77.55447875
-16,Knowledge Park II,21.4,Aqua line,25-01-2019,Elevated,28.4568669,77.50005403
-17,Pari Chowk Greater Noida,22.5,Aqua line,25-01-2019,Elevated,28.4631285,77.50809851
-18,Alpha 1 Greater Noida,23.4,Aqua line,25-01-2019,Elevated,28.4709,77.5127
-19,Delta 1 Greater Noida,24.9,Aqua line,25-01-2019,Elevated,28.474388,77.50399
-20,GNIDA Office,26.2,Aqua line,25-01-2019,Elevated,28.474388,77.50399
-21,Depot Greater Noida,27.1,Aqua line,25-01-2019,Elevated,28.474388,77.50399
-1,Dwarka [Conn: Blue],0,Gray line,04-10-2019,Elevated,28.5771915,77.0442935
+38,Shiv Vihar,52.6,Pink line,31-10-2018,Elevated,28.721463,77.289398
+1,Noida Sector 51,0,Aqua line,25-01-2019,Elevated,28.585548,77.375374 
+2,Noida Sector 50,1.3,Aqua line,25-01-2019,Elevated,28.574518,77.377206
+3,Noida Sector 76,2.3,Aqua line,25-01-2019,Elevated,28.56533,77.37966 
+4,Noida Sector 101,3.4,Aqua line,25-01-2019,Elevated,28.5896,77.3732 
+5,Noida Sector 81,4.3,Aqua line,25-01-2019,Elevated,28.572,77.394 
+8,Noida Sector 137,8.9,Aqua line,25-01-2019,Elevated,28.542,77.416 
+9,Noida Sector 142,10.5,Aqua line,25-01-2019,Elevated,28.513,77.423 
+10,Noida Sector 143,11.5,Aqua line,25-01-2019,Elevated,28.506,77.438 
+11,Noida Sector 144,12.9,Aqua line,25-01-2019,Elevated,28.48629,77.43308 
+12,Noida Sector 145,14.1,Aqua line,25-01-2019,Elevated,28.47913,77.44231 
+13,Noida Sector 146,15.8,Aqua line,25-01-2019,Elevated,28.450,77.450 
+14,Noida Sector 147,17.3,Aqua line,25-01-2019,Elevated,28.430,77.460 
+15,Noida Sector 148,18.9,Aqua line,25-01-2019,Elevated,28.410,77.475 
+16,Knowledge Park II,21.4,Aqua line,25-01-2019,Elevated,28.45722,77.49722
+17,Pari Chowk Greater Noida,22.5,Aqua line,25-01-2019,Elevated,28.480,77.530 
+18,Alpha 1 Greater Noida,23.4,Aqua line,25-01-2019,Elevated,28.6132,77.3947 
+19,Delta 1 Greater Noida,24.9,Aqua line,25-01-2019,Elevated,28.625,77.400 
+20,GNIDA Office,26.2,Aqua line,25-01-2019,Elevated,28.620,77.410 
+21,Depot Greater Noida,27.1,Aqua line,25-01-2019,Elevated,28.630,77.420 
+1,Dwarka [Conn: Blue],0,Gray line,04-10-2019,Elevated,28.61564,77.02197
 2,Nangli,1.5,Gray line,04-10-2019,Elevated,28.6173003,77.0104375
 3,Najafgarh,3.9,Gray line,04-10-2019,Underground,28.612304,76.9823908
 1,New Delhi-Airport Express [Conn: Yellow],0,Orange line,23-02-2011,Underground,28.64307,77.22144

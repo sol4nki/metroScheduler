@@ -18,11 +18,11 @@ colors = {"Red line":"\033[38;2;237;28;36m","Yellow line":"\033[38;2;255;242;0m"
 #     print(colors[dat[3]] + ', '.join(dat) + "\033[0m")
 
 # just trying to imagine what the graph might look like:
-# for line in metro_data:
-#     dat = line.strip().split(',')
-#     if dat[3] == "Blue line" or dat[3] == "Blue line branch":
-#         color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
-#         print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
+for line in metro_data:
+    dat = line.strip().split(',')
+    if dat[3] == "Blue line" or dat[3] == "Blue line branch":
+        color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
+        print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
 
 
 def fare_calc(loc1, loc2, day):
