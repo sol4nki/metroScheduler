@@ -268,7 +268,7 @@ def journey_plan():
     use_current_time = ''
     lup = True
     while lup:
-        day = input(("\t\t\tAre you travelling on a weekday? (y/n): "))
+        day = input(("\t\t\tAre you travelling on sunday? (y/n): "))
         if day.lower() == 'y' or day.lower() == 'n':
             lup = False
         else:
@@ -283,7 +283,7 @@ def journey_plan():
     if use_current_time.lower() == 'y':
         idk_hrs = (time.strftime("%H", time.localtime()))
         idk_mins = (time.strftime("%M", time.localtime()))
-        print(f"\t\t\tPlanning journey from {x} to {y} on a {'weekday' if day.lower() == 'y' else 'weekend'} at {idk_hrs}:{idk_mins}...")
+        print(f"\t\t\tPlanning journey from {x} to {y} on a {'sunday' if day.lower() == 'y' else 'weekday'} at {idk_hrs}:{idk_mins}...")
         time.sleep(10)
     else:
         idk = (input(("\t\t\tEnter time of travel in 24-hour format [HOUR:MINS] : ")))
@@ -298,7 +298,7 @@ def journey_plan():
             print(f"\t\t\t{red}[!] [!] Invalid time format! Returning to main menu... [!]{reset}")
             time.sleep(2)
             return 1
-        print(f"\t\t\t:D Planning journey from {x} to {y} on a {'weekday' if day.lower() == 'y' else 'weekend'} at {idk_hrs}:{idk_mins}...")
+        print(f"\t\t\t:D Planning journey from {x} to {y} on a {'sunday' if day.lower() == 'y' else 'weekday'} at {idk_hrs}:{idk_mins}...")
         time.sleep(10)
     return 1
                 

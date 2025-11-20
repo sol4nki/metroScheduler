@@ -6,10 +6,24 @@
 
 from banner import no_service
 
-with open('./data/metro_data.csv', 'r') as f:
+with open('./data/metro_data.txt', 'r') as f:
     metro_data = f.readlines()
     metro_data.pop(0) 
 colors = {"Red line":"\033[38;2;237;28;36m","Yellow line":"\033[38;2;255;242;0m","Blue line":"\033[38;2;0;112;192m", "Blue line branch":"\033[38;2;0;112;192m", "Green line":"\033[38;2;0;155;72m", "Green line branch":"\033[38;2;0;155;72m", "Violet line":"\033[38;2;111;45;145m","Pink line":"\033[38;2;255;105;180m","Magenta line":"\033[38;2;255;0;255m","Grey line":"\033[38;2;128;128;128m","Airport Express":"\033[38;2;0;153;153m","White line":"\033[38;2;255;255;255m", "Orange line":"\033[38;2;255;128;0m", "Rapid Metro":"\033[0m", "Aqua line": "\033[38;2;0;255;255m", "Gray line": "\033[38;2;128;128;128m"}
+temp = 1000
+count=0
+x = []
+for l in metro_data:
+    dat = l.strip().split(',')
+    for l in metro_data:
+        count+=1
+        idk = l.strip().split(',')
+        # print(dat[-4], idk[-4], count)
+        x.append(abs(float(dat[-4]) - float(idk[-4])) if dat[-4] != idk[-4] else 1000)
+x.sort()
+print("smallest 10 lat distances are :")
+for i in range(100):
+    print(f"{i+1}th -> {x[i]}")
 
 # for line in metro_data:
 #     # print(dat)
@@ -18,11 +32,11 @@ colors = {"Red line":"\033[38;2;237;28;36m","Yellow line":"\033[38;2;255;242;0m"
 #     print(colors[dat[3]] + ', '.join(dat) + "\033[0m")
 
 # just trying to imagine what the graph might look like:
-for line in metro_data:
-    dat = line.strip().split(',')
-    if dat[3] == "Blue line" or dat[3] == "Blue line branch":
-        color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
-        print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
+# for line in metro_data:
+#     dat = line.strip().split(',')
+#     if dat[3] == "Blue line" or dat[3] == "Blue line branch":
+#         color = colors[dat[-2]] if dat[-2] != 'None' else colors[dat[3]] # ok so this wasnt working because it ran both ascii codes not its working when i use variable assignment
+#         print(colors[dat[3]] + '==' + "\033[0m" + color + dat[1] + "\033[0m", end="")
 
 
 def fare_calc(loc1, loc2, day):
@@ -48,5 +62,5 @@ def journey_plan(loc1, loc2, day, time):
 
     return 1
 
-metro_timings("Rajiv Chowk", "Dwarka Sector 14", 5)
+# metro_timings("Rajiv Chowk", "Dwarka Sector 14", 5)
 

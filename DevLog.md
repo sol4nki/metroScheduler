@@ -106,3 +106,177 @@ need to do:
 -> [!!!!] just figured out that many of the coordinate pairs are wrong in this dataset even tho its a nice dataset i have to fix it myself F
 
 -> almsot entire day spend fixing the map bruh
+
+memo -> find the largest lat and long (also the minimum too just iterate over the code once simple python script)
+```py
+tempmin = 10000000
+tempmax = 0
+
+for i in metro_data:
+    data = i.strip().split(',')
+    if float(data[-2]) >= tempmax:
+        name1 = data[1]
+        tempmax = float(data[-2])
+    if float(data[-2]) <= tempmin:
+        name2 = data[1]
+        tempmin = float(data[-2])
+```
+```
+pr4njal@Macbook-Air metroScheduler % python3 metro_simulator.py
+max lat Samaypur Badli(First Station)  +  28.7446158
+min lat Raja Nahar Singh  +  28.3400192
+pr4njal@Macbook-Air metroScheduler % python3 metro_simulator.py
+max long Pari Chowk Greater Noida  +  77.53
+min long Brigadier Hoshiar Singh  +  76.9192027
+```
+ill double confirm from the `delhi_metro_map.html` file generated using plotly.py
+[image attachment placeholder]
+
+so we know box size is width -> [28.3400192, 28.7446158] and height -> [76.9192027, 77.53]
+
+like might need difference too? smallest difference? 
+n^2 time complexity 
+```py
+temp = 1000
+count=0
+for l in metro_data:
+    dat = l.strip().split(',')
+    for l in metro_data:
+        count+=1
+        idk = l.strip().split(',')
+        # print(dat[-4], idk[-4], count)
+        if abs(float(dat[-4]) - float(idk[-4])) < temp and abs(float(dat[-4]) - float(idk[-4])) != 0:
+            temp = abs(float(dat[-4]) - float(idk[-4]))
+
+print(f"smallest distance to scale is {temp} lat units")
+```
+
+lol this is crazy so we can just take it accurately to like idk
+```
+pr4njal@Macbook-Air metroScheduler % python3 metro_simulator.py
+smallest distance to scale is 2.500000000793534e-06 lat units
+```
+
+so this aint gon work, ill just make a list sort it and print least 10 values to get a viable so called "limit" to lat long on the graph ill make
+
+```py
+temp = 1000
+count=0
+x = []
+for l in metro_data:
+    dat = l.strip().split(',')
+    for l in metro_data:
+        count+=1
+        idk = l.strip().split(',')
+        # print(dat[-4], idk[-4], count)
+        x.append(abs(float(dat[-4]) - float(idk[-4])) if dat[-4] != idk[-4] else 1000)
+x.sort()
+print("smallest 10 lat distances are :")
+for i in range(10):
+    print(f"{i+1}th -> {x[i]}")
+```
+
+
+
+i dont even know what to say atp
+```
+pr4njal@Macbook-Air metroScheduler % python3 metro_simulator.py
+smallest 10 lat distances are :
+1th -> 2.500000000793534e-06
+2th -> 2.500000000793534e-06
+3th -> 3.899999999390502e-06
+4th -> 3.899999999390502e-06
+5th -> 5.39999999915608e-06
+6th -> 5.39999999915608e-06
+7th -> 6.100000000230921e-06
+8th -> 6.100000000230921e-06
+9th -> 9.999999999621423e-06
+10th -> 9.999999999621423e-06
+```
+
+ill just take 9.999999999621423e-06 as the metric because def these are stations i overlooked when updating lats and longs
+
+so unit is -> `0.000010`. now well 
+
+### graph?!?!
+
+```py
+width = 100
+height = 20
+
+for i in range(height):
+    for x in range(width):
+        print("*", end="")
+    print()
+```
+
+so basically prints a grid same as the logic of a game now i just need to implement quick checks to check (x,i) coord and leading to ill change i to y so (x,y) leading to easy grid rendering [i can also use current terminal size using shutil btw ill try dat]
+
+
+```py
+width = 100
+height = 20
+while True:
+    os.system('clear')
+    for i in range(shutil.get_terminal_size().lines - 2):
+        print("|", end="")
+        for x in range(shutil.get_terminal_size().columns -2):
+            print("*", end="")
+        print("|", end="")
+        print()
+    time.sleep(1)
+
+```
+
+works beautifully i dont think i can find any solution better than this :pray: just dec sleep time to 0.1 for qucik response ill keep it 1sec for easy debugging :D
+
+
+now ill work on getting the data and printing on the screen
+
+
+welp another sad day to be programming i might have some clue why output is 269 and 283 cause floating point div is messed up in py or its just overlapping closeby stations (ill love to consider the latter) ill take "268 283" by taking 1000 like it was before
+```py
+width   = 100
+height  = 20
+min_lat = 28.3400192
+max_lat = 28.7446158
+min_lon = 76.9192027
+max_lon = 77.5300000
+
+make_dict = {}
+# this must must reduce the time complexity by alot when again n again re rendering
+for i in metro_data:
+    data = i.strip().split(',')
+    lat = float(data[-4])
+    lon = float(data[-3])
+    make_dict[int((lat-min_lat)*10000000000), int((lon-min_lon)*10000000000)] = (data[1])
+
+print(make_dict, len(make_dict), len(metro_data))
+
+```
+
+ALSO I M NOT TAKING "10000000000" ITS JUST FOR DEBUGGING WHY DICT LEN != LEN OF INIT LIST
+
+this absolute beauty works now, my eyes are blessed 
+
+```py
+print(make_dict, len(make_dict), len(metro_data))
+reset   = "\033[0m"
+while True:
+    os.system('clear')
+    for i in range(shutil.get_terminal_size().lines - 2):
+        
+        print("|", end="")
+        for x in range(shutil.get_terminal_size().columns -2):
+            print(f"{f"{make_dict[(x+200, i+200)][1]}*{reset}" if (x+200, i+200) in make_dict else "_"}", end="")
+        print("|", end="")
+        print()
+    print((x+100, i+100))
+    time.sleep(0.1)
+
+```
+
+just gotta work w/ the joining of these chars now somehow hmm using \\ - | or sum better chars "mapscii braille if it works"
+
+
+
