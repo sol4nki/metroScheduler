@@ -282,3 +282,39 @@ just gotta work w/ the joining of these chars now somehow hmm using \\ - | or su
 # day 5 (fri nov 21)
 
 todos -> graph finish, logic setup for main loop i.e. fare and time calc (will be easy because of dict) (maybe(maybe))
+
+first lets finish fare and time calc will be way easier
+
+
+```py
+eee = (list(make_dict.keys()))
+tmp1 = 0
+tmp2 = 0
+for i in eee:
+    tmp1 = max(tmp1, i[0])
+    tmp2 = max(tmp2, i[1])
+print(tmp1, tmp2)
+```
+max is `404 610` so yeah
+`(0, 397) (357, 0)` min coords && better max coords `(404, 219) (139, 610)`
+
+better code snippet 
+```py
+eee = (list(make_dict.keys()))
+tmp1 = 0
+tmp2 = 0
+for i in eee:
+    tmp1 = max(tmp1, i[0])
+    if tmp1 == i[0]:
+        t1 = i
+    tmp2 = max(tmp2, i[1])
+    if tmp2 == i[1]:
+        t2 = i
+print(t1, t2)
+```
+
+logical flaw in code -> `abs(int((lat-max_lat)*1000))` needed to use max_lat but i went with min_lat
+
+also needed to switch x,y coords cause map was rotated by 90deg lol 
+
+now wtv the hash of this specific commit is that will contain an amazing working map :>> fixed alot by experimenting this evening
