@@ -367,3 +367,5 @@ if s > 120:
 evening updates gang -> 
 
 also bersenham algo isnt all that easy F 
+
+added everything in one main function
