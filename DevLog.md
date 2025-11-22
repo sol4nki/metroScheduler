@@ -318,3 +318,11 @@ logical flaw in code -> `abs(int((lat-max_lat)*1000))` needed to use max_lat but
 also needed to switch x,y coords cause map was rotated by 90deg lol 
 
 now wtv the hash of this specific commit is that will contain an amazing working map :>> fixed alot by experimenting this evening
+
+need to draw lines, after some quick google searches `Bresenham` seems like a easy and quick to implement line drawing algorithm
+ALSO ADDED QUICK SEARCH!!!!!!!!
+expanded journey plan + forgot to git push didnt do much todsay F
+
+
+# day 6 (sat nov 22)
+

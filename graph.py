@@ -49,7 +49,7 @@ while True:
             y+=1
         print("|", end="")
         print()
-    print((x+ou1, y+ou2))
+    print((x+ou1, y+ou2), " ←↑→↓ arrow keys to navigate | q to quit | s to search ")
     x = keyinp.input_key()
     match x:
         case 'q':
@@ -68,6 +68,18 @@ while True:
         case "LEFT":
             if ou2+10 > 0:
                 ou2 -= 10
+        case "s":
+            t = False
+            station_name = input("Enter station name to search: ")
+            for key in make_dict:
+                if station_name.lower() in make_dict[key][0].lower():
+                    ou1, ou2 = abs(shutil.get_terminal_size().lines//2-key[0]-2), abs(shutil.get_terminal_size().columns//2-key[1]-2)
+                    t = True
+                    break
+            if not t:
+                print("[!] Station not found! [!]")
+                time.sleep(1)
+                
         case _:
             pass
                         

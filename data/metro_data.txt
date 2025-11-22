@@ -78,8 +78,8 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 11,Nawada,11.4,Blue line,30-12-2005,Elevated,28.62025,77.04514,None,None
 12,Uttam Nagar West,12.4,Blue line,30-12-2005,Elevated,28.62481,77.0653,None,None
 13,Uttam Nagar East,13.4,Blue line,30-12-2005,Elevated,28.62177,77.05585,None,None
-14,Janak Puri West [Conn: Magenta],14.7,Blue line,30-12-2005,Elevated,28.62943,77.07767,Magenta,None
-15,Janak Puri East,15.7,Blue line,30-12-2005,Elevated,28.63305,77.08669,None,None
+14,Janakpuri West [Conn: Magenta],14.7,Blue line,30-12-2005,Elevated,28.62943,77.07767,Magenta,None
+15,Janakpuri East,15.7,Blue line,30-12-2005,Elevated,28.63305,77.08669,None,None
 16,Tilak Nagar,16.7,Blue line,30-12-2005,Elevated,28.63657,77.09648,None,None
 17,Subhash Nagar,17.6,Blue line,30-12-2005,Elevated,28.64039,77.10495,None,None
 18,Tagore Garden,18.5,Blue line,30-12-2005,Elevated,28.64379,77.11284,None,None
@@ -173,7 +173,7 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 14,Kailash Colony,16.4,Violet line,03-10-2010,Elevated,28.55527,77.24205,None,None
 15,Nehru Place,17.4,Violet line,03-10-2010,Elevated,28.55148,77.25154,None,None
 16,Kalkaji Mandir [Conn: Magenta],18.2,Violet line,03-10-2010,Elevated,28.55007,77.25835,Magenta,None
-17,Govind Puri,18.9,Violet line,03-10-2010,Elevated,28.54451,77.26401,None,None
+17,Govindpuri,18.9,Violet line,03-10-2010,Elevated,28.54451,77.26401,None,None
 18,Harkesh Nagar Okhla,20,Violet line,03-10-2010,Elevated,28.54292,77.27504,None,None
 19,Jasola,20.9,Violet line,03-10-2010,Elevated,28.53824,77.28319,None,None
 20,Sarita Vihar,22.1,Violet line,03-10-2010,Elevated,28.52878,77.28826,None,None
@@ -191,7 +191,7 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 32,Escorts Mujesar,40.1,Violet line,06-09-2015,Elevated,28.3702344,77.3149203,None,None
 33,Sant Surdas - Sihi,41.8,Violet line,19-11-2018,Elevated,28.3546513,77.3162264,None,None
 34,Raja Nahar Singh,43.5,Violet line,19-11-2018,Elevated,28.3400192,77.3164281,None,None
-1,Janak Puri West [Conn: Blue],0,Magenta line,29-05-2018,Underground,28.6289502,77.0779235,Blue,None
+1,Janakpuri West [Conn: Blue],0,Magenta line,29-05-2018,Underground,28.6289502,77.0779235,Blue,None
 2,Dabri Mor - Janakpuri South,2,Magenta line,29-05-2018,Underground,28.6157555,77.085178,None,None
 3,Dashrath Puri,3.1,Magenta line,29-05-2018,Underground,28.6018751,77.0823561,None,None
 4,Palam,4.6,Magenta line,29-05-2018,Underground,28.5918933,77.0828242,None,None
