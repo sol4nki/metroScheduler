@@ -1,29 +1,83 @@
-# this file only contains the "big" chunks of text that ill 
-# use to make it aesthetically pleasing nothing mych
+import time # using this to delay, animate, reset, take current time and many more time related fns
+import os # using this to clear the screen after each load to make it look like an animation
+import shutil # this is another amazing module i am using to center text using terminal size to make app responsive
+import re # using this to fix the centering issue by removing ascii escape codes from text while centering using .center
+import sys # using this for checking os type to make this cross platform
 
-import time # i m using this for almost everything this is the best module ever
-import os # using this to clear the screen after each load to make it look like an nimation
-import shutil # this is another amazing module ill use it rn to fix the loading centering issue
-import re # using this to fix the cenrtering issue
-import sys
-ansi_pattern = re.compile(r'\x1b\[[0-9;]*m')
+ansi_pattern = re.compile(r'\x1b\[[0-9;]*m') #this is regex pattern that will be matched and removed before centering 
+# because when centering text with ANSI escape codes, the codes themselves can affect the calculated length of the text, leading to incorrect centering.
 
-# SABSE PHELE DATA 
+
+# [!] FIRST THING -> LOAD METRO DATA [!]
 with open('./data/metro_data.txt', 'r+') as f:
     metro_data = f.readlines()
-    metro_data.pop(0)
-    
+    metro_data.pop(0) # REMOVING THE CSV FILE HEADER (first one)
+
+
+# [!] DEFINING COLORS FOR LINES [!]
 colors = {"Red line":"\033[38;2;237;28;36m","Yellow line":"\033[38;2;255;242;0m","Blue line":"\033[38;2;0;112;192m", "Blue line branch":"\033[38;2;0;112;192m", "Green line":"\033[38;2;0;155;72m", "Green line branch":"\033[38;2;0;155;72m", "Violet line":"\033[38;2;111;45;145m","Pink line":"\033[38;2;255;105;180m","Magenta line":"\033[38;2;255;0;255m","Grey line":"\033[38;2;128;128;128m","Airport Express":"\033[38;2;0;153;153m","White line":"\033[38;2;255;255;255m", "Orange line":"\033[38;2;255;128;0m", "Rapid Metro":"\033[0m", "Aqua line": "\033[38;2;0;255;255m", "Gray line": "\033[38;2;128;128;128m"}
+
+
+# [!] KEY INPUT DETECTION FOR ABSOLUTE CROSS PLATFORM FUNCTIONALITY [!]
+if os.name == 'nt':
+    import msvcrt # inbuilt module for windows systems
+
+    def input_key():
+        return msvcrt.getch()
+else:
+    import termios # inbuilt module for unix based systems (linux and macOS) x1
+    import tty # module for unix based systems x2 (linux and macOS) x2
+
+    def input_key():
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+
+        try:
+            tty.setraw(fd)
+            ch = sys.stdin.read(1)
+            if ch in ('\r', '\n'): return "ENTER"
+            if ch == '\x03': raise KeyboardInterrupt 
+            if ch == '\x1b': # escape seq for arrow key because its like ^[[A like something this
+                ch2 = sys.stdin.read(1)
+                ch3 = sys.stdin.read(1)
+                if ch2 == '[':
+                    if ch3 == 'A': return "UP"
+                    if ch3 == 'B': return "DOWN"
+                    if ch3 == 'C': return "RIGHT"
+                    if ch3 == 'D': return "LEFT"
+            return ch # prints any other keyboard inp like abcd whatever u like 
+                    
+            
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return None
 
 
 # [!] MAIN MENUS FUNCTIONS [!]
 
 def center_ansi(text, width):
+    """
+    ---
+    text: str -> text to be centered
+    width: int -> total width to center within
+    ---
+    returns: str -> centered text
+    ---
+    simple function to center text
+    """
     visible_text = ansi_pattern.sub('', text)
     pad = max(0, (width - len(visible_text)) // 2)
     return ' ' * pad + text
 
 def introduction():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: int -> 1/Truthy if success
+    ---
+    simple function to print the welcome banner
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;10m"
@@ -54,8 +108,12 @@ def introduction():
 
 def loading(i):
     """
-    # using match so i can use time later on and then
-    # just print the dots (i couldnt figure out how to work with \n sequences in these)
+    ---
+    i: int -> input seconds as int to print specific loading animation frame (out of 3 possible frames)
+    ---
+    returns: int -> 1/Truthy if success
+    ---
+    simple function to print ... loading animation
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
@@ -92,6 +150,11 @@ def loading(i):
 
 def clear_screen():
     """
+    ---
+    no parameters [!]
+    ---
+    returns: None -> no returns because it literally cleans the screen
+    ---
     # I am using this because on reading os.system('clear') manual
     # it states it has cls and clear diff for windows and linux and a solution
     # on stackoverflow suggested to use nt so i am going with nt
@@ -103,8 +166,15 @@ def clear_screen():
 
 def menu():
     """
-    this just prints the menu, couldnt figure out shutil center with ascii escape color codes so
-    going with plain stuff and color
+    ---
+    no parameters [!]
+    ---
+    returns: int 1 -> 1/Truthy if success
+             int 0 -> 0/Falsy if failure
+             int len(menu_text)-1 -> if "exit"
+             Exception as e -> None returned and e printed (will change in production)
+    ---
+    Prints an animated menu with arrow key nav functionality and enter to select option
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
@@ -130,7 +200,7 @@ def menu():
     try:
         while not exit:
             clear_screen()
-            width = shutil.get_terminal_size().columns # i am getting it everytime just in case user resizes
+            width = shutil.get_terminal_size().columns # i am getting width from shutil everytime just in case user resizes
             print(("═"*len("███╗   ███╗███████╗███╗   ██╗██╗   ██╗ ")).center(width))
             for line in x.split("\n"):
                 print(center_ansi(line, width))
@@ -168,15 +238,21 @@ def menu():
             # active = active+1 if active < len(menu_text) else active-1
             # clear_screen()
     except Exception as e:
-        print(e)
+        print(e) # ill remove/change this at production time
         return None
         
     return 1
 
 def time_display():
     """
-    i couldnt figure out how to return this and work similarly so i m just printing for now
-    so i had kept %S for only debugging but it looks nice so ill keep it forever
+    ---
+    no parameters [!]
+    ---
+    returns: None -> it directly prints the time in a loop every second no return required
+    ---
+    while loop to print current time every second after sleeping each sec
+    # i couldnt figure out how to return this and work similarly so i m just printing for now
+    # so i had kept %S for only debugging but it looks nice so ill keep it forever
     """
     while True:
         print("="*len("|| "+ time.strftime("%H:%M:%S", time.localtime()) + " ||"))
@@ -187,7 +263,12 @@ def time_display():
 
 def no_service():
     """
-    nothing special only a banner
+    ---
+    no parameters [!]
+    ---
+    returns: None -> Nothing because it just prints the no_service banner
+    ---
+    nothing special, prints the no_service banner when metro is closed/menu not working/some error occurs
     """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
@@ -212,6 +293,14 @@ def no_service():
     print(center_ansi(f"{red}[!] Sorry for the inconvinence [!]{reset}", width))
 
 def more_info():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: None -> Just prints info about project and me
+    ---
+    info directly printed about project and me
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;10m"
@@ -252,6 +341,14 @@ You can check metro timings, fare calculations, a metro map displayer and quick 
     print(x)
 
 def journey_plan():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: int ->  1/Truthy if success
+    ---
+    Prints the centered banner for journey planner which is then sent to another function that processed that data and gives us the final outcome of all this (most prolly using diff function in production for outcome)
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;10m"
@@ -309,8 +406,16 @@ def journey_plan():
         print(f"\t\t\t:D Planning journey from {x} to {y} on a {'sunday' if day.lower() == 'y' else 'weekday'} at {idk_hrs}:{idk_mins}...")
         time.sleep(10)
     return 1
-                
+# need to clla function above mein and below mein            
 def metro_timings():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: int -> 1/Truthy if success
+    ---
+    Just prints the timings banner, takes required inputs and then sends to another function that calculates timings and stuff (most prolly using diff function in production for outcome)
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;10m"
@@ -339,6 +444,15 @@ def metro_timings():
     return 1
                
 def metro_map():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: int -> 1/Truthy if success
+    ---
+    This is just a placeholder before the actual map is printed!!!
+    Just prints the metro map banner and then calls the graph rendering function for displaying the actual functional metro map
+    """
     saffron = "\033[38;2;255;153;51m"
     white   = "\033[38;2;255;255;255m"
     green   = "\033[38;2;19;136;10m"
@@ -362,48 +476,10 @@ def metro_map():
     return 1
 
 
-# KEY INPUT WALA FUNCTION
 
 
-if os.name == 'nt':
-    import msvcrt
-
-    def input_key():
-        return msvcrt.getch()
-
-else:
-    import sys
-    import termios
-    import tty
-
-    def input_key():
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-
-        try:
-            tty.setraw(fd)
-            ch = sys.stdin.read(1)
-            if ch in ('\r', '\n'): return "ENTER"
-            if ch == '\x03': raise KeyboardInterrupt # i need to add many more input options
-            if ch == '\x1b': # arrow key ka escape sequence
-                ch2 = sys.stdin.read(1)
-                ch3 = sys.stdin.read(1)
-                if ch2 == '[':
-                    if ch3 == 'A': return "UP"
-                    if ch3 == 'B': return "DOWN"
-                    if ch3 == 'C': return "RIGHT"
-                    if ch3 == 'D': return "LEFT"
-            return ch
-                    
-            
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        return None
-
-
-
-# GRAPH WALA FUNCTION
-
+# [!] SOME GLOBAL VAR FOR THE GRAPH FUNCTION!! [!]
+# THESE ARE JUST HERE IN CASE I NEED THEM LATER ON WHEN DEBUGGING OR CHANGING SOME STUFF
 width   = 100
 height  = 20
 min_lat = 28.3400192
@@ -413,8 +489,17 @@ max_lon = 77.5300000
 SCALE = 1000
 
 make_dict = {}
+
 # this must must reduce the time complexity by alot when again n again re rendering
 def build_dict(SCALE):
+    """
+    ---
+    SCALE: int -> scale factor for lat lon to x y conversion
+    ---
+    returns: dict -> mapping of (x, y) coordinates to (station name, color)
+    ---
+    simple function to build a dictionary for the metro map
+    """
     make_dict = {}
     for i in metro_data:
         data = i.strip().split(',')
@@ -422,12 +507,18 @@ def build_dict(SCALE):
         lon = float(data[-4])
         make_dict[abs(int((lat-max_lat)*SCALE)), int((lon-min_lon)*SCALE)] = (data[1], colors[data[3]])
     return make_dict
-# build_dict()
-# print(make_dict, len(make_dict), len(metro_data))
-# reset   = "\033[0m"
-# ou1, ou2 = 100, 100
-# c = True
+
 def graph_renderer():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: None -> no returns prints directly to buffer
+    ---
+    Renders the metro map in terminal using ascii characters and ANSI escape codes for colors
+    [!] Simple to use i have all keys listed q,c,+,-,=,s all of them work amazingly [!]
+    [!] Arrow keys to navigate the map up, down, left, right [!]
+    """
     width   = 100
     height  = 20
     min_lat = 28.3400192
@@ -513,8 +604,7 @@ def graph_renderer():
         time.sleep(0.1)
         
 
-# METRO SIM WALEY FUNCTIONS
-
+# [!] ACTUAL CALULATION FUNCTIONS ARE BELOW [!]
 def fare_calc(loc1, loc2, day):
     
 
@@ -525,7 +615,18 @@ def time_converter(time):
     """
     x,y = divmod(time, 60)
     return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<=10 or 17<=x<=19 else '[OFF-PEAK]'}" #02 zero padded fstring
-
+def suggestions(loc, line):
+    """
+    doc string placehodler ill add later on
+    """
+    line = line + " line" if "line" not in line.lower() else line
+    sugg = []
+    for i in metro_data:
+        if loc.lower() in i.lower() and line.lower() in i.lower():
+            sugg.append(i.strip().split(',')[1])
+    if sugg:
+        return f"\033[38;2;237;28;36m[!] Did you mean: {', '.join(sugg)} ? [!]\033[0m"
+    return f'\033[38;2;237;28;36m[!] No station has/contains the name {loc} on {line} line.\033[0m'
 def metro_timings(loc, line, time):
     """
     doc string placehodler ill add later on
@@ -614,19 +715,15 @@ def journey_plan(loc1, loc2, day, time):
 
 
 if __name__ == "__main__":
-    clear_screen() # just using this because i want a clear canvas using python functional notation name_xyz not javascript nameXyz
-    clear_screen() # twice because running only once leads to the dir path still being printed
-    (introduction())
+    clear_screen() 
+    clear_screen() # x2 twice because running only once leads to the dir path still being printed in terminal
+    (introduction()) # printing banner
     time.sleep(1)
-    clear_screen()
+    clear_screen() # clearing after the banner
+    # this loop prints the dot ... loading . .. ...
     for i in range(3):
         print(loading(i))
         time.sleep(0.5)
         clear_screen()
 
-    x = menu()
-    # print(x)
-    # (more_info())
-    # time_display()
-
-    # no_service()
+    menu() # prints interative main menu 

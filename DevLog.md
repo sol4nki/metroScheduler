@@ -369,3 +369,5 @@ evening updates gang ->
 also bersenham algo isnt all that easy F 
 
 added everything in one main function
+
+i m too tired ill just do changes no devlogs for you mate
