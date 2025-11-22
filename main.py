@@ -37,6 +37,7 @@ else:
             ch = sys.stdin.read(1)
             if ch in ('\r', '\n'): return "ENTER"
             if ch == '\x03': raise KeyboardInterrupt 
+            if ch == '\b' or ch == '\x7f': return "BACKSPACE"
             if ch == '\x1b': # escape seq for arrow key because its like ^[[A like something this
                 ch2 = sys.stdin.read(1)
                 ch3 = sys.stdin.read(1)
@@ -615,18 +616,34 @@ def time_converter(time):
     """
     x,y = divmod(time, 60)
     return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<=10 or 17<=x<=19 else '[OFF-PEAK]'}" #02 zero padded fstring
-def suggestions(loc, line):
+def suggestions():
     """
     doc string placehodler ill add later on
     """
-    line = line + " line" if "line" not in line.lower() else line
-    sugg = []
-    for i in metro_data:
-        if loc.lower() in i.lower() and line.lower() in i.lower():
-            sugg.append(i.strip().split(',')[1])
-    if sugg:
-        return f"\033[38;2;237;28;36m[!] Did you mean: {', '.join(sugg)} ? [!]\033[0m"
-    return f'\033[38;2;237;28;36m[!] No station has/contains the name {loc} on {line} line.\033[0m'
+    idk = ''
+    jjj = []
+    while True:
+        clear_screen()
+        print()
+        print()
+        print(f"enter name : {idk}", end="\n")
+        print(jjj)
+        x = input_key()
+        if x == "BACKSPACE":
+            idk = idk[:-1]
+        elif x == "ENTER":
+            break
+        else:
+            idk+=x
+        jjj = []
+        for i in metro_data:
+            
+            if idk.lower() in i.lower():
+                jjj.append(i)
+        
+        # time.sleep(0.1)
+        
+# suggestions() WORKS LES GOOOO
 def metro_timings(loc, line, time):
     """
     doc string placehodler ill add later on
