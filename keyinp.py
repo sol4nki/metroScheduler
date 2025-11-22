@@ -37,3 +37,19 @@ else:
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return None
+
+# x = """1,Yamuna Bank,0,Blue line branch,10-05-2009,At-Grade,28.62331,77.26792,None,None,0
+# 2,Laxmi Nagar,1.3,Blue line branch,06-01-2010,Elevated,28.63064,77.27749,None,None,8
+# 3,Nirman Vihar,2.4,Blue line branch,06-01-2010,Elevated,28.63663,77.28683,None,None,16
+# 4,Preet Vihar,3.4,Blue line branch,06-01-2010,Elevated,28.64171,77.29543,None,None,24
+# 5,Karkar Duma [Conn: Pink],4.6,Blue line branch,06-01-2010,Elevated,28.64849,77.30558,Pink,None,32
+# 6,Anand Vihar [Conn: Pink],5.7,Blue line branch,06-01-2010,Elevated,28.64695,77.31603,Pink,None,40
+# 7,Kaushambi,6.5,Blue line branch,14-07-2011,Elevated,28.64544,77.32432,None,None,48
+# 8,Vaishali,8.1,Blue line branch,14-07-2011,Elevated,28.64997,77.33974,None,None,56
+# """
+
+# x = x.strip().split('\n')
+# for i in x:
+#     i = i.strip().split(',')
+#     # print(i)
+#     print(i[0] + ',' + i[1])

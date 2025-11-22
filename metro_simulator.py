@@ -35,7 +35,7 @@ def time_converter(time):
     converts mins to hh:mm format
     """
     x,y = divmod(time, 60)
-    return f"{x:02}:{y:02}" #02 zero padded fstring
+    return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<=10 or 17<=x<=19 else '[OFF-PEAK]'}" #02 zero padded fstring
 
 def metro_timings(loc, line, time):
     """
@@ -60,7 +60,7 @@ def metro_timings(loc, line, time):
             tym3 = (tym2) + 4 if ((tym2 + 4) < 600 and (tym2 + 4) > 480) or ((tym2 + 4) > 1020 and (tym2 + 4) < 1380) else tym2+8
             if mins < (tym):
                 return f"""
-                \033[38;2;237;28;36mThe first train from {loc} on {line} line is at {time_converter((tym))}.\033[0m
+                \033[38;2;237;28;36mThe first metro from {loc} on {line} line is at {time_converter((tym))}.\033[0m
                 Subsequent trains are available at -> {time_converter(tym1)}, {time_converter(tym2)}, {time_converter(tym3)}.
                 """
             else:
@@ -70,8 +70,15 @@ def metro_timings(loc, line, time):
                         o+=4
                     else:
                         o+=8
-                    
-                return time_converter(o)
+                tym = o
+                tym1 = (tym) + 4 if ((tym + 4) < 600 and (tym + 4) > 480) or ((tym + 4) > 1020 and (tym + 4) < 1380) else tym+8
+                tym2 = (tym1) + 4 if ((tym1 + 4) < 600 and (tym1 + 4) > 480) or ((tym1 + 4) > 1020 and (tym1 + 4) < 1380) else tym1+8
+                tym3 = (tym2) + 4 if ((tym2 + 4) < 600 and (tym2 + 4) > 480) or ((tym2 + 4) > 1020 and (tym2 + 4) < 1380) else tym2+8
+
+                return f"""
+                \033[38;2;237;28;36mThe Metro from {loc} on {line} line is at {time_converter((tym))}.\033[0m
+                Subsequent trains are available at -> {time_converter(tym1)}, {time_converter(tym2)}, {time_converter(tym3)}.
+                """
             return i
     return f'\033[38;2;237;28;36m[!] No station has/contains the name {loc} on {line} line.\033[0m'
 
@@ -113,4 +120,4 @@ def journey_plan(loc1, loc2, day, time):
     return 1
 # journey_plan("Uttam Nagar West", "Govindpuri", "sunday", 10)
 # print(journey_plan.__doc__)
-print(metro_timings("janakpuri west", "blue", "17:50"))
+print(metro_timings("janakpuri west", "blue", "16:40"))

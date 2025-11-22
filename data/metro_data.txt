@@ -1,4 +1,4 @@
-ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Year),Layout,Latitude,Longitude,Connection1,Connection2
+ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Year),Layout,Latitude,Longitude,Connection1,Connection2,Time
 1,Shaheed Sthal(First Station),0,Red line,08-03-2019,Elevated,28.6706109,77.4155822,None,None,0
 2,Hindon River,1,Red line,08-03-2019,Elevated,28.6734147,77.4035924,None,None,8
 3,Arthala,2.5,Red line,08-03-2019,Elevated,28.676999,77.3918919,None,None,16

@@ -363,3 +363,7 @@ if s > 120:
     s -= 8
     s+=4
 ```
+
+evening updates gang -> 
+
+also bersenham algo isnt all that easy F 

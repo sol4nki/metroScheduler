@@ -25,31 +25,34 @@ min_lat = 28.3400192
 max_lat = 28.7446158
 min_lon = 76.9192027
 max_lon = 77.5300000
+SCALE = 1000
 
 make_dict = {}
 # this must must reduce the time complexity by alot when again n again re rendering
-for i in metro_data:
-    data = i.strip().split(',')
-    lat = float(data[-4])
-    lon = float(data[-3])
-    make_dict[abs(int((lat-max_lat)*1000)), int((lon-min_lon)*1000)] = (data[1], colors[data[3]])
-
+def build_dict():
+    for i in metro_data:
+        data = i.strip().split(',')
+        lat = float(data[-5])
+        lon = float(data[-4])
+        make_dict[abs(int((lat-max_lat)*SCALE)), int((lon-min_lon)*SCALE)] = (data[1], colors[data[3]])
+build_dict()
 # print(make_dict, len(make_dict), len(metro_data))
 reset   = "\033[0m"
-ou1, ou2 = 0, 0
-
+ou1, ou2 = 100, 100
+c = True
 while True:
     os.system('clear')
+    
     for x in range(shutil.get_terminal_size().lines - 2):
         y = 0
         print("|", end="")
         while y < (shutil.get_terminal_size().columns -2):
-            print(f"{(f"{make_dict[(x+ou1, y+ou2)][1]}* {make_dict[(x+ou1, y+ou2)][0]}{reset}" if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else " ") if (x+ou1, y+ou2) in make_dict else " "}", end="")
-            y+=(len(f"* {make_dict[(x+ou1, y+ou2)][0]}")-1 if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else 0) if (x+ou1, y+ou2) in make_dict else 0
+            print(f"{(f"{make_dict[(x+ou1, y+ou2)][1]}◉ {make_dict[(x+ou1, y+ou2)][0] if c else ''}{reset}" if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else " ") if (x+ou1, y+ou2) in make_dict else " "}", end="")
+            y+=(len(f"◉ {make_dict[(x+ou1, y+ou2)][0] if c else ''}")-1 if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else 0) if ((x+ou1, y+ou2) in make_dict) else 0
             y+=1
         print("|", end="")
         print()
-    print((x+ou1, y+ou2), " ←↑→↓ arrow keys to navigate | q to quit | s to search ")
+    print((x+ou1, y+ou2), " ←↑→↓ arrow keys to navigate | q to quit | s to search | c to toggle names | '-/+' to zoom")
     x = keyinp.input_key()
     match x:
         case 'q':
@@ -79,7 +82,23 @@ while True:
             if not t:
                 print("[!] Station not found! [!]")
                 time.sleep(1)
-                
+        case "c":
+            c = not c
+        case "-":
+            SCALE = int(SCALE * 0.8)
+            make_dict = {}
+            ou1, ou2 = ou1*0.8, ou2*0.8
+            build_dict()
+        case "+":
+            SCALE = int(SCALE * 1.25)
+            make_dict = {}
+            # ou1, ou2 = ou1*1.25, ou2*1.25
+            build_dict()
+        case "=":
+            SCALE = int(SCALE * 1.25)
+            make_dict = {}
+            # ou1, ou2 = ou1*1.25, ou2*1.25
+            build_dict()
         case _:
             pass
                         
