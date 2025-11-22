@@ -326,3 +326,40 @@ expanded journey plan + forgot to git push didnt do much todsay F
 
 # day 6 (sat nov 22)
 
+fixed the fns a little 
+
+either metro data needs to change ill add initial time or something or well idk calc distance using difference and multiply by the speed of metro? take 
+
+https://delhimetrorail.com/train-frequency implement this? i dont know later on maybe rn ill go with avg of all these around 3.1mins off peak and 2.3mins on peak
+and leaving 8mins but given frequency is 8min and 4min ill rather go with dat
+
+wrote a quick script to append the given frequency time at the end easy calc ke liye
+
+```py
+with open('./data/metro_data.txt', 'r+') as f:
+    metro_data = f.readlines()
+    j = metro_data[0]
+    metro_data.pop(0)
+    f.seek(0)
+    f.truncate() # file clear karni thi without using w+ :DD
+    f.write(j)
+    for i in metro_data:
+        
+        if i[0] == "1" and i[1] == ",":
+            s = 0
+            i = i.strip() + f",{s}" + "\n"
+            f.write(i)
+        else:
+            s+=4
+            i = i.strip() + f",{s}" + "\n"
+            f.write(i)
+            print("hi")
+```
+
+added extra logic -> cause 120mins baad 8 baj jauyenge and that's peak hours
+```py
+s+=8
+if s > 120:
+    s -= 8
+    s+=4
+```
