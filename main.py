@@ -648,10 +648,11 @@ def suggestions():
         for i in metro_data:
             
             if idk.lower() in i.lower():
-                jjj.append(i)
+                jjj.append(i.strip().split(',')[1])
         
         # time.sleep(0.1)
-        
+
+# suggestions()
 # suggestions() WORKS LES GOOOO
 def metro_timings(loc, line, time):
     """
@@ -665,7 +666,6 @@ def metro_timings(loc, line, time):
     simple function to center text
     """
     line = line + " line" if "line" not in line.lower() else line
-            
     x,y = map(int, time.split(':'))
     if y > 60 or y < 0:
         return f'\033[38;2;237;28;36m[!] Invalid minutes value: {y}. It should be between 0 and 59.\033[0m'
@@ -705,8 +705,7 @@ def metro_timings(loc, line, time):
             return i
     return f'\033[38;2;237;28;36m[!] No station has/contains the name {loc} on {line} line.\033[0m'
 
-
-# ('gotta make quick suggestions type stuff')
+# ('gotta make quick suggestions type stuff') made completed tick
 
 def journey_plan(loc1, loc2, day, time):
     """
@@ -741,10 +740,6 @@ def journey_plan(loc1, loc2, day, time):
     print(f"From {loc1} to {loc2} on {day} at {time} hours")
     # basically go from x to (switch till j line change)
     return 1
-# journey_plan("Uttam Nagar West", "Govindpuri", "sunday", 10)
-# print(journey_plan.__doc__)
-# print(metro_timings("janakpuri west", "blue", "16:40"))
-
 
 if __name__ == "idk":
     clear_screen() 
@@ -759,6 +754,76 @@ if __name__ == "idk":
         clear_screen()
 
     menu() # prints interative main menu 
+data123 = []
+for i in metro_data:
+    data123.append(i.strip().split(','))
+
+# def line_switch(line1, line2):
+#     line1_line = line1 + " line" if "line" not in line1 else line1
+#     line2_line = line2 + " line" if "line" not in line2 else line2
+#     for i in data123:
+#         if i[3] == line1_line and (i[-2] == line2 or i[-3] == line2):
+#             print("Change at " + i[1])
+#         if i[3] == line2_line and (i[-2] == line1 or i[-3] == line1):
+#             print("Change at " + i[1])
+# def multi_line_switch(route_lines):
+#     for i in range(len(route_lines) - 1):
+#         line_a = route_lines[i]
+#         line_b = route_lines[i+1]
+#         print(f"\n--- {line_a} → {line_b} ---")
+#         line_switch(line_a, line_b)
+# line_switch("Blue", "Yellow")
+
+# multi_line_switch("Blue", "Yellow")
+# journey_plan("Janakpuri west [Conn: Blue]", "kalkaji", "sunday", 10)
+
+def line_graph_for_bfs_idontknowman(data123):
+    graph = {}  
+
+    for row in data123:
+        line_main = row[3].replace(" line", "")
 
 
+        con1 = row[-2]
+        con2 = row[-3]
+
+        if line_main not in graph:
+            graph[line_main] = set()
+
+        for c in (con1, con2):
+            if c and c != "":
+                if c not in graph:
+                    graph[c] = set()
+                graph[line_main].add(c)
+                graph[c].add(line_main)
+
+    return graph
+
+def find_all_paths_idontcareabouttimecomplexity(graph, start, end):
+    all_paths = []
+
+    def dfs(current, end, visited, path):
+        if current == end:
+            all_paths.append(path[:])
+            return
+        
+        for nxt in graph[current]:
+            if nxt not in visited:
+                visited.add(nxt)
+                path.append(nxt)
+
+                dfs(nxt, end, visited, path)
+
+                path.pop()
+                visited.remove(nxt)
+
+    dfs(start, end, {start}, [start])
+    return all_paths
+
+graph = line_graph_for_bfs_idontknowman(data123)
+
+paths = find_all_paths_idontcareabouttimecomplexity(graph, "Blue", "Yellow")
+
+for p in paths:
+    print(" → ".join(p))
 
