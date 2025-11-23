@@ -612,7 +612,16 @@ def fare_calc(loc1, loc2, day):
     return 1
 def time_converter(time):
     """
-    converts mins to hh:mm format
+    ---
+    time: int -> time in minutes
+    ---
+    returns: str -> in HH:MM [PEAK/OFF-PEAK] format
+    ---
+    just divmod to convert min to HH:MM and fstring to format it nicely
+    08:00-10:00 and 17:00-19:00 are peak hours
+    00:00-08:00, 10:00-17:00 and 19:00-24:00 are off-peak hours
+    360 mins = 6:00 AM
+    1380 mins = 11:00 PM
     """
     x,y = divmod(time, 60)
     return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<=10 or 17<=x<=19 else '[OFF-PEAK]'}" #02 zero padded fstring
@@ -646,7 +655,14 @@ def suggestions():
 # suggestions() WORKS LES GOOOO
 def metro_timings(loc, line, time):
     """
-    doc string placehodler ill add later on
+    ---
+    loc: str -> station name
+    line: str -> metro line
+    time: int -> time in HH:MM format
+    ---
+    returns: str -> outcome of the computations 
+    ---
+    simple function to center text
     """
     line = line + " line" if "line" not in line.lower() else line
             
@@ -730,8 +746,7 @@ def journey_plan(loc1, loc2, day, time):
 # print(metro_timings("janakpuri west", "blue", "16:40"))
 
 
-
-if __name__ == "__main__":
+if __name__ == "idk":
     clear_screen() 
     clear_screen() # x2 twice because running only once leads to the dir path still being printed in terminal
     (introduction()) # printing banner
@@ -744,3 +759,6 @@ if __name__ == "__main__":
         clear_screen()
 
     menu() # prints interative main menu 
+
+
+
