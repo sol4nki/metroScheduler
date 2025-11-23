@@ -606,10 +606,46 @@ def graph_renderer():
         
 
 # [!] ACTUAL CALULATION FUNCTIONS ARE BELOW [!]
-def fare_calc(loc1, loc2, day):
-    
+def fare_calc(distance, day):
+    # all of this is from the dmrc data i found online and also mentioned in report, so its official
+    # i have added it in the readme too (add in production release)
+    if distance <= 2:
+        return 11
 
-    return 1
+    if day.lower() == 'sunday':
+        if distance <= 5:
+            return 11
+        elif distance <= 12:
+            return 21
+        elif distance <= 21:
+            return 32
+        elif distance <= 32:
+            return 43
+        else:
+            return 54
+    else:
+        if d <= 5:
+            return 21
+        elif d <= 12:
+            return 32
+        elif d <= 21:
+            return 43
+        elif d <= 32:
+            return 54
+        else:
+            return 64
+
+# found out there also exists a time limit takes 2 min to implement so i am adding this too
+def ticket_valid_time(distance_km):
+    # retruns time in mins convert it later
+    if distance_km <= 2:
+        return 65
+    elif distance_km <= 21:
+        return 100
+    elif distance_km <= 32:
+        return 180
+    return None
+
 def time_converter(time):
     """
     ---
@@ -777,53 +813,153 @@ for i in metro_data:
 # multi_line_switch("Blue", "Yellow")
 # journey_plan("Janakpuri west [Conn: Blue]", "kalkaji", "sunday", 10)
 
-def line_graph_for_bfs_idontknowman(data123):
-    graph = {}  
+# def line_graph_for_bfs_idontknowman(data123):
+#     graph = {}  
+#     for row in data123:
+#         line_main = row[3].replace(" line", "")
+#         con1 = row[-2]
+#         con2 = row[-3]
+
+#         if line_main not in graph:
+#             graph[line_main] = set()
+
+#         for c in (con1, con2):
+#             if c != 'None' and c != "":
+#                 if c not in graph:
+#                     graph[c] = set()
+#                 graph[line_main].add(c)
+#                 graph[c].add(line_main)
+#     return graph
+
+# def find_all_paths_idontcareabouttimecomplexity(graph, start, end, max_stations=5):
+#     all_paths = []
+#     def dfs(current, end, visited, path):
+#         if len(path) > max_stations:
+#             return
+#         if current == end:
+#             all_paths.append(path[:])
+#             return
+#         for nxt in graph[current]:
+#             if nxt not in visited:
+#                 visited.add(nxt)
+#                 path.append(nxt)
+#                 dfs(nxt, end, visited, path)
+#                 path.pop()
+#                 visited.remove(nxt)
+#     dfs(start, end, {start}, [start])
+#     return all_paths
+
+# graph = line_graph_for_bfs_idontknowman(data123)
+# paths = find_all_paths_idontcareabouttimecomplexity(graph, "Blue", "Violet")
+
+# for p in paths:
+#     print(" → ".join(p))
+
+
+def clean_station_name(s):
+    if s is None:
+        return None
+    s = s.strip()
+    if s.lower() == "none":
+        return None
+    s = re.sub(r"\s*\[.*?\]", "", s)
+    return s.strip()
+
+def is_line_name(x):
+    if x is None:
+        return False
+    x = x.strip().lower()
+    return x in ["blue","yellow","pink","red","green","violet","magenta","orange","aqua","gray"]
+
+def build_station_graph(data123):
+    graph = {}
+    dist_map = {}
+    line_groups = {}
 
     for row in data123:
-        line_main = row[3].replace(" line", "")
+        station = clean_station_name(row[1])
+        line = row[3].strip()
+        dist = float(row[2])
 
+        if station not in graph:
+            graph[station] = set()
 
-        con1 = row[-2]
-        con2 = row[-3]
+        dist_map[station] = dist
 
-        if line_main not in graph:
-            graph[line_main] = set()
+        if line not in line_groups:
+            line_groups[line] = []
+        line_groups[line].append(station)
+
+        con2 = clean_station_name(row[-3])
+        con1 = clean_station_name(row[-2])
 
         for c in (con1, con2):
-            if c and c != "":
-                if c not in graph:
-                    graph[c] = set()
-                graph[line_main].add(c)
-                graph[c].add(line_main)
+            if c is None:
+                continue
+            if is_line_name(c):
+                continue
+            if c not in graph:
+                graph[c] = set()
+            graph[station].add(c)
+            graph[c].add(station)
 
-    return graph
+    for line, stations in line_groups.items():
+        for i in range(len(stations) - 1):
+            a, b = stations[i], stations[i+1]
+            graph[a].add(b)
+            graph[b].add(a)
 
-def find_all_paths_idontcareabouttimecomplexity(graph, start, end):
+    return graph, dist_map
+
+def path_distance(path, dist_map):
+    d = 0
+    for i in range(len(path)-1):
+        d += abs(dist_map[path[i+1]] - dist_map[path[i]])
+    return d
+
+def find_paths(graph, start, end, dist_map, max_len=30):
     all_paths = []
 
-    def dfs(current, end, visited, path):
-        if current == end:
+    def dfs(cur, end, visited, path):
+        if len(path) > max_len:
+            return
+        if cur == end:
             all_paths.append(path[:])
             return
-        
-        for nxt in graph[current]:
+        for nxt in graph[cur]:
             if nxt not in visited:
                 visited.add(nxt)
                 path.append(nxt)
 
                 dfs(nxt, end, visited, path)
-
+                
                 path.pop()
                 visited.remove(nxt)
 
     dfs(start, end, {start}, [start])
-    return all_paths
 
-graph = line_graph_for_bfs_idontknowman(data123)
+    scored = []
+    for p in all_paths:
+        scored.append((path_distance(p, dist_map), p))
 
-paths = find_all_paths_idontcareabouttimecomplexity(graph, "Blue", "Yellow")
+    for i in range(len(scored)):
+        for j in range(i + 1, len(scored)):
+            if scored[i][0] > scored[j][0]:
+                scored[i], scored[j] = scored[j], scored[i]
 
-for p in paths:
-    print(" → ".join(p))
+    return scored[:3] # mai sirf top 3 print karunga but
+    # i dont know how to modify dfs or any other algo that can give me output in a better time complexity
 
+
+graph, dist_map = build_station_graph(data123)
+
+start = clean_station_name("Uttam Nagar West")
+end = clean_station_name("Harkesh Nagar Okhla")
+
+top3 = find_paths(graph, start, end, dist_map)
+
+for d, p in top3:
+    print(" → ".join(p), "|", round(d, 2), "km", fare_calc(d, "saturday"), "INR")
+
+
+# i can also code a qr ticket from scratch btw
