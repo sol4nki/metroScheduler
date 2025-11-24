@@ -372,7 +372,7 @@ added everything in one main function
 
 i m too tired ill just do changes no devlogs for you mate
 
-# day 7 (sun nov 22)
+# day 7 (sun nov 23)
 
 i m tired x2x2x2 so i wont be writing devlogs now but yeah made many changes 
 spent almost entire day figuring out bfs dfs graph search dijkstra what not nothing sounds simple with this very specific csv
@@ -380,3 +380,5 @@ spent almost entire day figuring out bfs dfs graph search dijkstra what not noth
 dfs using finally with graph dict F just check code commited w/ this specific devlog update
 
 i can also code a dummy qr ticket from scratch maybe if i have enough time wont be that hard just dict data maybe cause i dont know metro hashes and stuff 
+
+# day 8 (mon nov 24)
