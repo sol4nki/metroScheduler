@@ -7,9 +7,8 @@ import sys # using this for checking os type to make this cross platform
 ansi_pattern = re.compile(r'\x1b\[[0-9;]*m') #this is regex pattern that will be matched and removed before centering 
 # because when centering text with ANSI escape codes, the codes themselves can affect the calculated length of the text, leading to incorrect centering.
 
-
 # [!] FIRST THING -> LOAD METRO DATA [!]
-with open('./data/metro_data.txt', 'r+') as f:
+with open('./metro_data.txt', 'r+') as f:
     metro_data = f.readlines()
     metro_data.pop(0) # REMOVING THE CSV FILE HEADER (first one)
 
@@ -23,7 +22,17 @@ if os.name == 'nt':
     import msvcrt # inbuilt module for windows systems
 
     def input_key():
-        return msvcrt.getch()
+        ch = msvcrt.getch() # added later on for cross platform same as linux macos i need to test before production release
+        if ch in (b'\r', b'\n'): return "ENTER"
+        if ch == b'\x03': raise KeyboardInterrupt
+        if ch in (b'\b', b'\x7f'): return "BACKSPACE"
+        if ch == b'\xe0' or ch == b'\x00':
+            ch2 = msvcrt.getch()
+            if ch2 == b'H': return "UP"
+            if ch2 == b'P': return "DOWN"
+            if ch2 == b'M': return "RIGHT"
+            if ch2 == b'K': return "LEFT"
+        return ch.decode(errors="ignore") if isinstance(ch, bytes) else ch
 else:
     import termios # inbuilt module for unix based systems (linux and macOS) x1
     import tty # module for unix based systems x2 (linux and macOS) x2
@@ -52,6 +61,7 @@ else:
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return None
+
 
 
 # [!] MAIN MENUS FUNCTIONS [!]
@@ -226,13 +236,25 @@ def menu():
                     exit = True
                     return active
                 if active == 3:
-                    more_info()
+                    try:
+                        more_info()
+                    except Exception as e:
+                        print(e, "\n[!] Returning to main menu...")
                 if active == 2:
-                    journey_plan()
+                    try:
+                        journey_plan()
+                    except Exception as e:
+                        print(e, "\n[!] Returning to main menu...")
                 if active == 1:
-                    metro_timings()
+                    try:
+                        metro_timings()
+                    except Exception as e:
+                        print(e, "\n[!] Returning to main menu...")
                 if active == 0:
-                    metro_map()
+                    try:
+                        metro_map()
+                    except Exception as e:
+                        print(e, "\n[!] Returning to main menu...")
                 
                 
             # time.sleep()
@@ -292,6 +314,8 @@ def no_service():
             print(center_ansi(line, width))
     print(center_ansi(f"{red}[!] Metro only operates from 6:00AM to 11:00PM [!]{reset}", width))
     print(center_ansi(f"{red}[!] Sorry for the inconvinence [!]{reset}", width))
+    print(center_ansi(f"{red}[!] Returning to main menu in 5 seconds...!!! [!]{reset}", width))
+    time.sleep(5)
 
 def more_info():
     """
@@ -390,7 +414,20 @@ def journey_plan():
         idk_hrs = (time.strftime("%H", time.localtime()))
         idk_mins = (time.strftime("%M", time.localtime()))
         print(f"\t\t\tPlanning journey from {x} to {y} on a {'sunday' if day.lower() == 'y' else 'weekday'} at {idk_hrs}:{idk_mins}...")
-        time.sleep(10)
+        # time.sleep(10)
+        if idk_hrs < '06' or (idk_hrs == '23' and idk_mins > '00') or idk_hrs > '23':
+            no_service()
+            return 1
+        start = clean_station_name(x)
+        end = clean_station_name(y)
+        top3 = find_paths(graph, start, end, dist_map)
+        for d, p in top3:
+            colored_path = []
+            for st in p:
+                colored_path.append(colorize_station(st))
+            print(" → ".join(colored_path), "|", "\n > Total Travel Distance is:", str(round(d, 2)) + "km", "\n > Total Price of Ticket is ₹" + str(fare_calc(d, day), f"\n > Total Travel Time is: {time_calc(d)}mins "))
+            print("-------".center(shutil.get_terminal_size().columns, '-'))
+
     else:
         idk = (input(("\t\t\tEnter time of travel in 24-hour format [HOUR:MINS] : ")))
         if ":" not in idk:
@@ -398,6 +435,9 @@ def journey_plan():
             time.sleep(2)
             return 1
         idk_hrs, idk_mins = str(idk).strip().split(":")
+        if idk_hrs < '06' or (idk_hrs == '23' and idk_mins > '00') or idk_hrs > '23':
+            no_service()
+            return 1
         if len(idk_hrs) == 1:
             idk_hrs = '0' + idk_hrs
         if int(idk_hrs) > 23 or int(idk_mins) > 59:
@@ -405,8 +445,24 @@ def journey_plan():
             time.sleep(2)
             return 1
         print(f"\t\t\t:D Planning journey from {x} to {y} on a {'sunday' if day.lower() == 'y' else 'weekday'} at {idk_hrs}:{idk_mins}...")
-        time.sleep(10)
-    return 1
+        
+        # time.sleep(10)
+        start = clean_station_name(x)
+        end = clean_station_name(y)
+        top3 = find_paths(graph, start, end, dist_map)
+        for d, p in top3:
+            colored_path = []
+            for st in p:
+                colored_path.append(colorize_station(st))
+            print("|", " → ".join(colored_path), "|", "\n > Total Travel Distance is:", str(round(d, 2)) + "km", "\n > Total Price of Ticket is ₹" + str(fare_calc(d, day)))
+            print("-------".center(shutil.get_terminal_size().columns, '-'))
+    print("\t\t\t-> Most Recommended Route is at the very top <-")
+    print()
+    print("\t\t\t[!] Press any key twice to return to main menu...")
+    time.sleep(2)
+    input_key()
+    return input_key()
+
 # need to clla function above mein and below mein            
 def metro_timings():
     """
@@ -422,6 +478,7 @@ def metro_timings():
     green   = "\033[38;2;19;136;10m"
     reset   = "\033[0m"
     blue = "\033[38;2;50;50;255m"
+    red = "\033[38;2;237;28;36m"
     x = f"""
 \t\t\t{saffron}████████╗██╗███╗   ███╗██╗███╗   ██╗ ██████╗ ███████╗
 \t\t\t╚══██╔══╝██║████╗ ████║██║████╗  ██║██╔════╝ ██╔════╝{reset}  
@@ -435,11 +492,37 @@ def metro_timings():
     print(center_ansi(x, shutil.get_terminal_size().columns))
     x = input(("\t\t\tWhich Metro line are you on?: "))
     y = input(("\t\t\tWhat is the name of your Station? : "))
+    tike = input(("\t\t\tEnter time of travel in 24-hour format [HOUR:MINS] or type 'now' to use current time: "))
+    if tike.lower() != 'now':
+        if ":" not in tike:
+            print(f"\t\t\t{red}[!] Invalid time format! Returning to main menu... [!]{reset}")
+            time.sleep(2)
+            return 1
+        idk_hrs, idk_mins = str(tike).strip().split(":")
+        if len(idk_hrs) == 1:
+            idk_hrs = '0' + idk_hrs
+        if int(idk_hrs) > 23 or int(idk_mins) > 59:
+            print(f"\t\t\t{red}[!] Invalid time format! Returning to main menu... [!]{reset}")
+            time.sleep(2)
+            return 1
+        print(f"\t\t\tUsing provided Time {idk_hrs}:{idk_mins} to find {x} line {y} metro timings...")
+        # time.sleep(0.5)
+        for i in metro_timings_real(y, x, f"{idk_hrs}:{idk_mins}").split("\n"):
+            print(f"\t\t{i}")
+            time.sleep(1)
+        print("\t\t\tPress any key to return to main menu...")
+        return input_key()
     idk_hrs = (time.strftime("%H", time.localtime()))
     idk_mins = (time.strftime("%M", time.localtime()))
     print(f"\t\t\tUsing current Time {idk_hrs}:{idk_mins} to find {x} line {y} metro timings...")
-    time.sleep(2)
-    print(center_ansi(x, shutil.get_terminal_size().columns))
+    # time.sleep(0.5)
+    for i in metro_timings_real(y, x, f"{idk_hrs}:{idk_mins}").split("\n"):
+        print(f"\t\t{i}")
+        time.sleep(1)
+    print("\t\t\tPress any key to return to main menu...")
+    return input_key()
+    # print(center_ansi(x, shutil.get_terminal_size().columns))
+    
 
     # gotta call that function i forgot its name but yeah wtv calculates timing and stuff also i need to generate qr code
     return 1
@@ -504,8 +587,8 @@ def build_dict(SCALE):
     make_dict = {}
     for i in metro_data:
         data = i.strip().split(',')
-        lat = float(data[-5])
-        lon = float(data[-4])
+        lat = float(data[-6])
+        lon = float(data[-5])
         make_dict[abs(int((lat-max_lat)*SCALE)), int((lon-min_lon)*SCALE)] = (data[1], colors[data[3]])
     return make_dict
 
@@ -612,7 +695,7 @@ def fare_calc(distance, day):
     if distance <= 2:
         return 11
 
-    if day.lower() == 'sunday':
+    if day.lower() == 'y':
         if distance <= 5:
             return 11
         elif distance <= 12:
@@ -624,17 +707,18 @@ def fare_calc(distance, day):
         else:
             return 54
     else:
-        if d <= 5:
+        if distance <= 5:
             return 21
-        elif d <= 12:
+        elif distance <= 12:
             return 32
-        elif d <= 21:
+        elif distance <= 21:
             return 43
-        elif d <= 32:
+        elif distance <= 32:
             return 54
         else:
             return 64
-
+def time_calc(distance_km):
+    return distance_km * (60 / 34.3) # in mins
 # found out there also exists a time limit takes 2 min to implement so i am adding this too
 def ticket_valid_time(distance_km):
     # retruns time in mins convert it later
@@ -660,7 +744,7 @@ def time_converter(time):
     1380 mins = 11:00 PM
     """
     x,y = divmod(time, 60)
-    return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<=10 or 17<=x<=19 else '[OFF-PEAK]'}" #02 zero padded fstring
+    return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<10 or 17<=x<19 else '[OFF-PEAK]'}" #02 zero padded fstring
 def suggestions():
     """
     doc string placehodler ill add later on
@@ -690,7 +774,7 @@ def suggestions():
 
 # suggestions()
 # suggestions() WORKS LES GOOOO
-def metro_timings(loc, line, time):
+def metro_timings_real(loc, line, time):
     """
     ---
     loc: str -> station name
@@ -702,48 +786,62 @@ def metro_timings(loc, line, time):
     simple function to center text
     """
     line = line + " line" if "line" not in line.lower() else line
-    x,y = map(int, time.split(':'))
-    if y > 60 or y < 0:
+
+    # wapis dalra with edge case
+    x, y = map(int, time.split(':'))
+    if y > 59 or y < 0:
         return f'\033[38;2;237;28;36m[!] Invalid minutes value: {y}. It should be between 0 and 59.\033[0m'
-    mins = x*60 + y
+
+    mins = x * 60 + y
     if mins < 360 or mins > 1380:
         no_service()
         return 0
+    def is_peak(t):
+        return (480 <= t < 600) or (1020 <= t < 1140)
 
-    for i in metro_data:
-        if loc.lower() in i.lower() and line.lower() in i.lower():
-            tym = int(i.strip().split(',')[-1]) + 360 # ffffff
+
+
+    def interval(t):
+        return 4 if is_peak(t) else 8
+
+    for row in metro_data:
+        cols = row.strip().split(',')
+        station = cols[1].lower()
+        metro_line = cols[3].lower()
+        first_time = int(cols[-2])
+
+        if loc.lower() in station and line.lower() in metro_line:
+            tym = first_time  # ffffff
+
             # previous state holde karni padegi cause phele error tha prev state hold nhi hori thi now it works amazingly
-            tym1 = (tym) + 4 if ((tym + 4) < 600 and (tym + 4) > 480) or ((tym + 4) > 1020 and (tym + 4) < 1380) else tym+8
-            tym2 = (tym1) + 4 if ((tym1 + 4) < 600 and (tym1 + 4) > 480) or ((tym1 + 4) > 1020 and (tym1 + 4) < 1380) else tym1+8
-            tym3 = (tym2) + 4 if ((tym2 + 4) < 600 and (tym2 + 4) > 480) or ((tym2 + 4) > 1020 and (tym2 + 4) < 1380) else tym2+8
-            if mins < (tym):
+            if mins < tym:
+                tym1 = tym + interval(tym)
+                tym2 = tym1 + interval(tym1)
+                tym3 = tym2 + interval(tym2)
                 return f"""
-                \033[38;2;237;28;36mThe first metro from {loc} on {line} line is at {time_converter((tym))}.\033[0m
+                \033[38;2;237;28;36mThe first metro from {loc} on {line} line is at {time_converter(tym)}.\033[0m
                 Subsequent trains are available at -> {time_converter(tym1)}, {time_converter(tym2)}, {time_converter(tym3)}.
                 """
-            else:
-                o = 360
-                while o < mins:
-                    if (o < 600 and o > 480) or (o > 1020 and o < 1380):
-                        o+=4
-                    else:
-                        o+=8
-                tym = o
-                tym1 = (tym) + 4 if ((tym + 4) < 600 and (tym + 4) > 480) or ((tym + 4) > 1020 and (tym + 4) < 1380) else tym+8
-                tym2 = (tym1) + 4 if ((tym1 + 4) < 600 and (tym1 + 4) > 480) or ((tym1 + 4) > 1020 and (tym1 + 4) < 1380) else tym1+8
-                tym3 = (tym2) + 4 if ((tym2 + 4) < 600 and (tym2 + 4) > 480) or ((tym2 + 4) > 1020 and (tym2 + 4) < 1380) else tym2+8
+            o = tym
+            while o < mins:
+                o += interval(o)
 
-                return f"""
-                \033[38;2;237;28;36mThe Metro from {loc} on {line} line is at {time_converter((tym))}.\033[0m
-                Subsequent trains are available at -> {time_converter(tym1)}, {time_converter(tym2)}, {time_converter(tym3)}.
-                """
-            return i
+            tym = o
+            tym1 = tym + interval(tym)
+            tym2 = tym1 + interval(tym1)
+            tym3 = tym2 + interval(tym2)
+
+            return f"""
+            \033[38;2;237;28;36mThe Metro from {loc} on {line} line is at {time_converter(tym)}.\033[0m
+            Subsequent trains are available at -> {time_converter(tym1)}, {time_converter(tym2)}, {time_converter(tym3)}.
+            """
+
     return f'\033[38;2;237;28;36m[!] No station has/contains the name {loc} on {line} line.\033[0m'
 
+# print(metro_timings("Janakpuri west", "Blue", "16:55").center(shutil.get_terminal_size().columns))
 # ('gotta make quick suggestions type stuff') made completed tick
 
-def journey_plan(loc1, loc2, day, time):
+def journey_plan_idk(loc1, loc2, day, time):
     """
     loc1 -> loc2 on day (sunday price low) and time peak or offpeak for calc of time and fare
     """
@@ -777,84 +875,9 @@ def journey_plan(loc1, loc2, day, time):
     # basically go from x to (switch till j line change)
     return 1
 
-if __name__ == "idk":
-    clear_screen() 
-    clear_screen() # x2 twice because running only once leads to the dir path still being printed in terminal
-    (introduction()) # printing banner
-    time.sleep(1)
-    clear_screen() # clearing after the banner
-    # this loop prints the dot ... loading . .. ...
-    for i in range(3):
-        print(loading(i))
-        time.sleep(0.5)
-        clear_screen()
-
-    menu() # prints interative main menu 
 data123 = []
 for i in metro_data:
     data123.append(i.strip().split(','))
-
-# def line_switch(line1, line2):
-#     line1_line = line1 + " line" if "line" not in line1 else line1
-#     line2_line = line2 + " line" if "line" not in line2 else line2
-#     for i in data123:
-#         if i[3] == line1_line and (i[-2] == line2 or i[-3] == line2):
-#             print("Change at " + i[1])
-#         if i[3] == line2_line and (i[-2] == line1 or i[-3] == line1):
-#             print("Change at " + i[1])
-# def multi_line_switch(route_lines):
-#     for i in range(len(route_lines) - 1):
-#         line_a = route_lines[i]
-#         line_b = route_lines[i+1]
-#         print(f"\n--- {line_a} → {line_b} ---")
-#         line_switch(line_a, line_b)
-# line_switch("Blue", "Yellow")
-
-# multi_line_switch("Blue", "Yellow")
-# journey_plan("Janakpuri west [Conn: Blue]", "kalkaji", "sunday", 10)
-
-# def line_graph_for_bfs_idontknowman(data123):
-#     graph = {}  
-#     for row in data123:
-#         line_main = row[3].replace(" line", "")
-#         con1 = row[-2]
-#         con2 = row[-3]
-
-#         if line_main not in graph:
-#             graph[line_main] = set()
-
-#         for c in (con1, con2):
-#             if c != 'None' and c != "":
-#                 if c not in graph:
-#                     graph[c] = set()
-#                 graph[line_main].add(c)
-#                 graph[c].add(line_main)
-#     return graph
-
-# def find_all_paths_idontcareabouttimecomplexity(graph, start, end, max_stations=5):
-#     all_paths = []
-#     def dfs(current, end, visited, path):
-#         if len(path) > max_stations:
-#             return
-#         if current == end:
-#             all_paths.append(path[:])
-#             return
-#         for nxt in graph[current]:
-#             if nxt not in visited:
-#                 visited.add(nxt)
-#                 path.append(nxt)
-#                 dfs(nxt, end, visited, path)
-#                 path.pop()
-#                 visited.remove(nxt)
-#     dfs(start, end, {start}, [start])
-#     return all_paths
-
-# graph = line_graph_for_bfs_idontknowman(data123)
-# paths = find_all_paths_idontcareabouttimecomplexity(graph, "Blue", "Violet")
-
-# for p in paths:
-#     print(" → ".join(p))
-
 
 def clean_station_name(s):
     if s is None:
@@ -890,8 +913,8 @@ def build_station_graph(data123):
             line_groups[line] = []
         line_groups[line].append(station)
 
-        con2 = clean_station_name(row[-3])
-        con1 = clean_station_name(row[-2])
+        con2 = clean_station_name(row[-4])
+        con1 = clean_station_name(row[-3])
 
         for c in (con1, con2):
             if c is None:
@@ -953,13 +976,43 @@ def find_paths(graph, start, end, dist_map, max_len=30):
 
 graph, dist_map = build_station_graph(data123)
 
-start = clean_station_name("Uttam Nagar West")
-end = clean_station_name("Harkesh Nagar Okhla")
+# start = clean_station_name("Uttam Nagar West")
+# end = clean_station_name("Harkesh Nagar Okhla")
 
-top3 = find_paths(graph, start, end, dist_map)
+# top3 = find_paths(graph, start, end, dist_map)
+station_to_line = {}
+for row in data123:
+    st = clean_station_name(row[1])
+    ln = row[3].strip()
+    station_to_line[st] = ln
 
-for d, p in top3:
-    print(" → ".join(p), "|", round(d, 2), "km", fare_calc(d, "saturday"), "INR")
+def colorize_station(station):
+    """
+    Returns colored station in its line color.
+    """
+    line = station_to_line.get(station, None)
+    if line in colors:
+        return f"{colors[line]}{station}\033[0m"
+    return station
+
+# for d, p in top3:
+#     colored_path = []
+#     for st in p:
+#         colored_path.append(colorize_station(st))
+#     print(" → ".join(colored_path), "|", round(d, 2), "km", "₹" + str(fare_calc(d, "saturday")))
 
 
-# i can also code a qr ticket from scratch btw
+
+if __name__ == "__main__":
+    clear_screen() 
+    clear_screen() # x2 twice because running only once leads to the dir path still being printed in terminal
+    (introduction()) # printing banner
+    time.sleep(1)
+    clear_screen() # clearing after the banner
+    # this loop prints the dot ... loading . .. ...
+    for i in range(3):
+        print(loading(i))
+        time.sleep(0.5)
+        clear_screen()
+
+    menu() # prints full main menu 
