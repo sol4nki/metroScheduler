@@ -205,7 +205,7 @@ def menu():
 
     
     active = 0
-    menu_text = ["Display Map", "Metro Timings", "Ride journey planner", "More Info", "Exit"]
+    menu_text = ["Display Map", "Metro Timings", "Ride journey planner", "Quick Search", "More Info", "Exit"]
     exit = False
     try:
         while not exit:
@@ -234,9 +234,14 @@ def menu():
                 if active == len(menu_text)-1:
                     exit = True
                     return active
-                if active == 3:
+                if active == 4:
                     try:
                         more_info()
+                    except Exception as e:
+                        print(e, "\n[!] Returning to main menu...")
+                if active == 3:
+                    try:
+                        quick_search()
                     except Exception as e:
                         print(e, "\n[!] Returning to main menu...")
                 if active == 2:
@@ -558,6 +563,76 @@ def metro_map():
     graph_renderer()
     return 1
 
+def quick_search():
+    """
+    ---
+    no parameters [!]
+    ---
+    returns: int -> 1/Truthy if success
+    ---
+    Just prints the quick search banner, takes required inputs and then sends to another function that processes that data and gives us the final outcome of all this
+    """
+    # same as suggestions but with a banner
+    saffron = "\033[38;2;255;153;51m"
+    white   = "\033[38;2;255;255;255m"
+    green   = "\033[38;2;19;136;10m"
+    reset   = "\033[0m"
+    blue = "\033[38;2;50;50;255m"
+    red = "\033[38;2;237;28;36m"
+    banner = f"""
+{saffron}███████╗███████╗ █████╗ ██████╗  ██████╗██╗  ██╗
+██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██║  ██║{reset}
+{white}███████╗█████╗  ███████║██████╔╝██║     ███████║{reset}
+{green}╚════██║██╔══╝  ██╔══██║██╔══██╗██║     ██╔══██║
+███████║███████╗██║  ██║██║  ██║╚██████╗██║  ██║
+╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝{reset}
+    """
+    text1 = f"{saffron}[!] Station Name :{reset}"
+    idk = ''
+    jjj = []
+    while True:
+        clear_screen()
+        print()
+        print()
+        for i in banner.split("\n"):
+            print(center_ansi(i, shutil.get_terminal_size().columns))
+        print()
+        print(f"{text1} : {idk}", end="\n")
+        print()
+        print("Suggestions: ")
+        kkkk = jjj[:10] if len(jjj) > 10 else jjj
+        print(" | " + ", ".join(i for i in kkkk) + " | ")
+        
+        x = input_key()
+        if x == "BACKSPACE":
+            idk = idk[:-1]
+        elif x == "ENTER":
+            print(colorize_station(jjj[0]) if len(jjj) > 0 else f"{red}[!] No station found with that name! [!]{reset}")
+            for i in metro_data:
+                if jjj[0].lower() == i.strip().split(',')[1].lower():
+                    print()
+                    print("-------")
+                    print(f"Full Station Name: {colorize_station(clean_station_name(i.strip().split(',')[1]))}")
+                    print(f"Station Code: {i[4].split(" ")[0]}-{i.strip().split(',')[0]}")
+                    print(f"Line Name: {i.strip().split(',')[3]}")
+                    print(f"Latitude: {i.strip().split(',')[-6]}")
+                    print(f"Longitude: {i.strip().split(',')[-5]}")
+                    print(f"Layout: {i.strip().split(',')[5]}")
+                    print(f"Est. Year: {i.strip().split(',')[4]}")
+                    print("-------")
+                    break
+            time.sleep(1)
+            print(f"{saffron}[!] Press any key to exit [!]{reset}")
+            # input_key()
+            return input_key()
+        else:
+            idk += x
+        
+        jjj = []
+        
+        for i in metro_data:
+            if idk.lower() in i.lower():
+                jjj.append(i.strip().split(',')[1])
 
 
 
@@ -777,7 +852,7 @@ def time_converter(time):
     x,y = divmod(time, 60)
     return f"{x:02}:{y:02} {'[PEAK]' if 8<=x<10 or 17<=x<19 else '[OFF-PEAK]'}" #02 zero padded fstring
 
-def suggestions():
+def suggestions(text1):
     """
     ---
     no parameters [!]
@@ -796,23 +871,29 @@ def suggestions():
         clear_screen()
         print()
         print()
-        print(f"enter name : {idk}", end="\n")
-        print(jjj)
+        
+        print(f"{text1} : {idk}", end="\n")
+        print()
+        print("Suggestions: ")
+        kkkk = jjj[:10] if len(jjj) > 10 else jjj
+        print(" | " + ", ".join(i for i in kkkk) + " | ")
+        
         x = input_key()
         if x == "BACKSPACE":
             idk = idk[:-1]
         elif x == "ENTER":
-            break
+            return jjj[0] if jjj else idk
         else:
-            idk+=x
+            idk += x
+        
         jjj = []
+        
         for i in metro_data:
-            
             if idk.lower() in i.lower():
                 jjj.append(i.strip().split(',')[1])
         
         # time.sleep(0.1)
-
+# suggestions("enter station 1 name")
 def metro_timings_real(loc, line, time):
     """
     ---
