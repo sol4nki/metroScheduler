@@ -2,6 +2,9 @@
 This project supports all the metro lines in Delhi and Delhi NCR region!!!
 You can check metro timings, fare calculations, a metro map displayer and quick metro journey planner.
 
+
+youtube video in case the provided video doesnt work: 
+https://youtu.be/1u626WZlew4
 ---
 
 
@@ -16,6 +19,10 @@ Project structure :
 ```
 
 Run `python3 metro_simulator.py` in your terminal
+
+
+Make sure you have all the files in the same folder
+
 
 I have added proper doc strings for all functions 
 
@@ -72,6 +79,8 @@ ID (Station ID),Station Names,Dist. From First Station(km),Metro Line,Opened(Yea
 This is the header for the txt file which i am popping when reading to prevent errors
 
 ## NOTE:
+
+More Details are inside the code itself i have added docstrings and comments to support the functions
 
 if we enter and exit the same station we do get a deduction of rupees 11 so i didnt implement the station1 == station2 logic as it is incorrect if fare isnt deducted for same station travel
 

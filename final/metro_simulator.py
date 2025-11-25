@@ -347,7 +347,7 @@ You can check metro timings, fare calculations, a metro map displayer and quick 
 {green}[ Metro Scheduler v1.00 ]{reset}
 {saffron}[ Pranjal Solanki | 2025386 ]{reset}
 [ GitHub: {blue}https://github.com/sol4nki/metroScheduler{reset} ]
-[ Video: {blue}ill create yt video baadmein{reset} ]
+[ Video: {blue}https://youtu.be/1u626WZlew4{reset} ]
 
 
 [!] press any key to go back to menu [!]{reset}
@@ -390,6 +390,10 @@ def journey_plan():
     print(center_ansi(x, shutil.get_terminal_size().columns))
     x = input(("\t\t\tWhich station are you closest to right now?: "))
     y = input(("\t\t\tWhat is your final destination?: "))
+    if clean_station_name(x) not in graph or clean_station_name(y) not in graph:
+        print(f"\t\t\t{red}[!] One or both of the stations you entered are invalid! Returning to main menu... [!]{reset}")
+        time.sleep(2)
+        return 1
     day = ''
     use_current_time = ''
     lup = True
@@ -487,6 +491,10 @@ def metro_timings():
     print(center_ansi(x, shutil.get_terminal_size().columns))
     x = input(("\t\t\tWhich Metro line are you on?: "))
     y = input(("\t\t\tWhat is the name of your Station? : "))
+    if clean_station_name(x) not in graph or clean_station_name(y) not in graph:
+        print(f"\t\t\t{red}[!] station name or line name you entered is invalid! Returning to main menu... [!]{reset}")
+        time.sleep(2)
+        return 1
     tike = input(("\t\t\tEnter time of travel in 24-hour format [HOUR:MINS] or type 'now' to use current time: "))
     if tike.lower() != 'now':
         if ":" not in tike:
@@ -619,8 +627,8 @@ def graph_renderer():
             y = 0
             print("|", end="")
             while y < (shutil.get_terminal_size().columns -2):
-                print(f"{(f"{make_dict[(x+ou1, y+ou2)][1]}◉ {make_dict[(x+ou1, y+ou2)][0] if c else ''}{reset}" if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else " ") if (x+ou1, y+ou2) in make_dict else " "}", end="")
-                y+=(len(f"◉ {make_dict[(x+ou1, y+ou2)][0] if c else ''}")-1 if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else 0) if ((x+ou1, y+ou2) in make_dict) else 0
+                print(f"{(f"{make_dict[(x+ou1, y+ou2)][1]}* {make_dict[(x+ou1, y+ou2)][0] if c else ''}{reset}" if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else " ") if (x+ou1, y+ou2) in make_dict else " "}", end="")
+                y+=(len(f"* {make_dict[(x+ou1, y+ou2)][0] if c else ''}")-1 if len(make_dict[(x+ou1, y+ou2)][0]) < (shutil.get_terminal_size().columns -2 - y) else 0) if ((x+ou1, y+ou2) in make_dict) else 0
                 y+=1
             print("|", end="")
             print()
@@ -751,7 +759,7 @@ def ticket_valid_time(distance_km):
         return 100
     elif distance_km <= 32:
         return 180
-    return None
+    return 'Forever'
 
 def time_converter(time):
     """
