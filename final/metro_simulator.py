@@ -393,8 +393,8 @@ def journey_plan():
     """
 
     print(center_ansi(x, shutil.get_terminal_size().columns))
-    x = input(("\t\t\tWhich station are you closest to right now?: "))
-    y = input(("\t\t\tWhat is your final destination?: "))
+    x = input(("\t\t\tWhich station are you closest to right now? (Case Sensitive): "))
+    y = input(("\t\t\tWhat is your final destination? (Case Sensitive): "))
     if clean_station_name(x) not in graph or clean_station_name(y) not in graph:
         print(f"\t\t\t{red}[!] One or both of the stations you entered are invalid! Returning to main menu... [!]{reset}")
         time.sleep(2)
@@ -495,7 +495,7 @@ def metro_timings():
 
     print(center_ansi(x, shutil.get_terminal_size().columns))
     x = input(("\t\t\tWhich Metro line are you on?: "))
-    y = input(("\t\t\tWhat is the name of your Station? : "))
+    y = input(("\t\t\tWhat is the name of your Station? (CASE SENSITIVE use Abc Xyz Kab) : "))
     if clean_station_name(y) not in graph:
         print(f"\t\t\t{red}[!] station name or line name you entered is invalid! Returning to main menu... [!]{reset}")
         time.sleep(2)
@@ -513,7 +513,7 @@ def metro_timings():
             print(f"\t\t\t{red}[!] Invalid time format! Returning to main menu... [!]{reset}")
             time.sleep(2)
             return 1
-        print(f"\t\t\tUsing provided Time {idk_hrs}:{idk_mins} to find {x} line {y} metro timings...")
+        print(f"\t\t\tUsing provided Time {idk_hrs}:{idk_mins} to find {x} {y} metro timings...")
         # time.sleep(0.5)
         for i in metro_timings_real(y, x, f"{idk_hrs}:{idk_mins}").split("\n"):
             print(f"\t\t{i}")
@@ -522,7 +522,7 @@ def metro_timings():
         return input_key()
     idk_hrs = (time.strftime("%H", time.localtime()))
     idk_mins = (time.strftime("%M", time.localtime()))
-    print(f"\t\t\tUsing current Time {idk_hrs}:{idk_mins} to find {x} line {y} metro timings...")
+    print(f"\t\t\tUsing current Time {idk_hrs}:{idk_mins} to find {x} {y} metro timings...")
     # time.sleep(0.5)
     for i in metro_timings_real(y, x, f"{idk_hrs}:{idk_mins}").split("\n"):
         print(f"\t\t{i}")
