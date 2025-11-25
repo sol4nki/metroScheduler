@@ -352,7 +352,7 @@ You can check metro timings, fare calculations, a metro map displayer and quick 
 {green}[ Metro Scheduler v1.00 ]{reset}
 {saffron}[ Pranjal Solanki | 2025386 ]{reset}
 [ GitHub: {blue}https://github.com/sol4nki/metroScheduler{reset} ]
-[ Video: {blue}https://youtu.be/1u626WZlew4{reset} ]
+[ Video: {blue}https://youtu.be/KqbaZbiuAnA{reset} ]
 
 
 [!] press any key to go back to menu [!]{reset}
@@ -496,7 +496,7 @@ def metro_timings():
     print(center_ansi(x, shutil.get_terminal_size().columns))
     x = input(("\t\t\tWhich Metro line are you on?: "))
     y = input(("\t\t\tWhat is the name of your Station? : "))
-    if clean_station_name(x) not in graph or clean_station_name(y) not in graph:
+    if clean_station_name(y) not in graph:
         print(f"\t\t\t{red}[!] station name or line name you entered is invalid! Returning to main menu... [!]{reset}")
         time.sleep(2)
         return 1
