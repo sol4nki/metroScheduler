@@ -14,9 +14,12 @@ https://www.youtube.com/watch?v=KqbaZbiuAnA
 
 ### How to use:
 
-Project structure :
+the files inside the "final" folder are the only important files that are required! others are just fillers 
+
+
+Project structure:
 ```
-.
+./final
 ├── metro_data.txt
 ├── metro_simulator.py
 └── README.md
