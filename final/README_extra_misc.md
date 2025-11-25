@@ -24,5 +24,7 @@ fully colored everything using ansi escape codes and it works on all terminals u
 colored menu with heading and details, using a list to iterate using key presses for incrementing or decrementing the index for the list to color (`>> xyz name <<` this part) 
 
 
+- custom input function, graph etc.
 
+- Various small things are mentioned inside the code you can have a look at the comments and doc strings i have fully documented the code properly.
 
