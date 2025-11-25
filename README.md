@@ -5,8 +5,9 @@ You can check metro timings, fare calculations, a metro map displayer and quick 
 
 youtube video in case the provided video doesnt work: 
 https://www.youtube.com/watch?v=KqbaZbiuAnA
+### click to play!
+[![Watch the video](https://img.youtube.com/vi/KqbaZbiuAnA/maxresdefault.jpg)](https://youtu.be/KqbaZbiuAnA)
 
-devlog is in the provided github repository in the info section it contains the entire journey of creating this code
 
 ---
 
