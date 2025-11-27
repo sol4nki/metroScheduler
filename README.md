@@ -31,7 +31,7 @@ Run `python3 metro_simulator.py` in your terminal
 Make sure you have all the files in the same folder
 
 
-I have added proper doc strings for all functions 
+I have added proper doc strings for all functions print using `fn_name.__doc__`
 
 
 and also added comments and full detail next to modules
